@@ -6,18 +6,26 @@ use Tekkl\Shared\Struct\Struct;
 
 class CssVariable extends Struct
 {
-    public function __construct(
-       protected readonly string $name,
-       protected readonly string $value,
-    ) {}
+    protected string $name;
+    protected string $value;
 
     public function getName(): string
     {
         return $this->name;
     }
 
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    public function setValue(string $value): void
+    {
+        $this->value = $value;
     }
 }

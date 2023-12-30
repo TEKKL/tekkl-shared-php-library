@@ -10,15 +10,7 @@ class Asset extends Struct
     protected string $name;
     protected string $url;
 
-    public function __construct(
-        string $name,
-        string $url,
-        ?string $type = null
-    ) {
-        $this->name = $name;
-        $this->url = $url;
-        $this->type = $type ?? $this->type;
-    }
+
     public function getName(): string
     {
         return $this->name;
