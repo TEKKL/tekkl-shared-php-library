@@ -1,0 +1,23 @@
+{
+  "name": "tekkl/shared-php-library",
+  "description": "TEKKL Shared PHP Library",
+  "type": "project",
+  "license": "(c) TEKKL GmbH. All rights reserved.",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "TEKKL GmbH"
+    }
+  ],
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=8.2",
+    "ext-ctype": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tekkl\\Shared\\": "src/"
+    }
+  }
+}
