@@ -21,15 +21,6 @@ class ContentAppConfig extends Struct
     protected FontCollection $fonts;
     protected Api $api;
 
-    public function __construct(
-        protected readonly ContentItemInterface $contentItem
-    ) {}
-
-    public function getContentItem(): ContentItemInterface
-    {
-        return $this->contentItem;
-    }
-
     public function getJavascriptAssets(): JavascriptAssetCollection
     {
         return $this->javascriptAssets;
