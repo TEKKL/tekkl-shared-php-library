@@ -19,55 +19,94 @@ final class PrivateMediaListEndpoint extends PostEndpoint
     {
         parent::__construct();
         $this->setParameters(new RequestParameterCollection());
-        $this->setBody(new RequestBody(
-            true,
-            ContentType::APPLICATION_JSON,
-            ParameterType::OBJECT,
-            new ParameterCollection([
-                'page' => new Parameter('page', ParameterType::INTEGER, ParameterFormat::INT32, false, 'the page to load', 1),
-                'limit' => new Parameter('limit', ParameterType::INTEGER, ParameterFormat::INT32, false, 'the number of items per page', 10),
-                'access_key' => new Parameter('access_key', ParameterType::STRING, ParameterFormat::STRING, true),
-            ])
-        ));
+        $this->setBody((new RequestBody())
+            ->setRequired(true)
+            ->setContentType(ContentType::APPLICATION_JSON)
+            ->setType(ParameterType::OBJECT)
+            ->setParameters((new ParameterCollection([
+                (new Parameter())
+                    ->setName('page')
+                    ->setType(ParameterType::INTEGER)
+                    ->setFormat(ParameterFormat::INT32)
+                    ->setRequired(false),
+                (new Parameter())
+                    ->setName('limit')
+                    ->setType(ParameterType::INTEGER)
+                    ->setFormat(ParameterFormat::INT32)
+                    ->setRequired(false),
+                (new Parameter())
+                    ->setName('access_key')
+                    ->setType(ParameterType::STRING)
+                    ->setFormat(ParameterFormat::STRING)
+                    ->setRequired(true)
+            ])))
+        );
         $this->setResponses(new ResponseCollection([
-            200 => new Response(
-                200,
-                'OK',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'data' => new Parameter('key', ParameterType::ARRAY, ParameterFormat::OBJECT, true, 'a collection of media items'),
-                        'page' => new Parameter('value', ParameterType::INTEGER, ParameterFormat::INT32, true),
-                        'limit' => new Parameter('value', ParameterType::INTEGER, ParameterFormat::INT32, true),
-                        'total' => new Parameter('value', ParameterType::MIXED, ParameterFormat::MIXED, true),
-                    ])
-                )
-            ),
-            400 => new Response(
-                400,
-                'Bad request. Missing or invalid parameters.',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-            403 => new Response(
-                403,
-                'User is not allowed to access media list',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
+            (new Response())
+                ->setStatusCode(200)
+                ->setDescription('OK')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('data')
+                            ->setType(ParameterType::ARRAY)
+                            ->setFormat(ParameterFormat::OBJECT)
+                            ->setRequired(true)
+                            ->setDescription('a collection of media items'),
+                        (new Parameter())
+                            ->setName('page')
+                            ->setType(ParameterType::INTEGER)
+                            ->setFormat(ParameterFormat::INT32)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('limit')
+                            ->setType(ParameterType::INTEGER)
+                            ->setFormat(ParameterFormat::INT32)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('total')
+                            ->setType(ParameterType::MIXED)
+                            ->setFormat(ParameterFormat::MIXED)
+                            ->setRequired(true)
+                    ])))),
+            (new Response())
+                ->setStatusCode(400)
+                ->setDescription('Bad request. Missing or invalid parameters.')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true)
+                    ])))),
+            (new Response())
+                ->setStatusCode(403)
+                ->setDescription('User is not allowed to access media list')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true)
+                    ]))))
         ]));
     }
 }

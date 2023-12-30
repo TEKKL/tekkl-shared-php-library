@@ -17,66 +17,101 @@ final class PublicDataReadEndpoint extends PostEndpoint
 {
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct();parent::__construct();
+
         $this->setParameters(new RequestParameterCollection());
-        $this->setBody(new RequestBody(
-            true,
-            ContentType::APPLICATION_JSON,
-            ParameterType::OBJECT,
-            new ParameterCollection([
-                'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, false),
-                'access_key' => new Parameter('access_key', ParameterType::STRING, ParameterFormat::STRING, true),
-            ])
-        ));
-        $this->setResponses(new ResponseCollection([
-            200 => new Response(
-                200,
-                'OK',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, true),
-                        'value' => new Parameter('value', ParameterType::MIXED, ParameterFormat::MIXED, true),
-                    ])
-                )
-            ),
-            400 => new Response(
-                400,
-                'Bad request. Missing or invalid parameters.',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-            403 => new Response(
-                403,
-                'User is not allowed to read the data',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-            404 => new Response(
-                404,
-                'Key not found',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-        ]));
+
+        $this->setBody((new RequestBody())
+            ->setRequired(true)
+            ->setContentType(ContentType::APPLICATION_JSON)
+            ->setType(ParameterType::OBJECT)
+            ->setParameters((new ParameterCollection([
+                (new Parameter())
+                    ->setName('key')
+                    ->setType(ParameterType::STRING)
+                    ->setFormat(ParameterFormat::STRING)
+                    ->setRequired(false),
+                (new Parameter())
+                    ->setName('access_key')
+                    ->setType(ParameterType::STRING)
+                    ->setFormat(ParameterFormat::STRING)
+                    ->setRequired(true)
+            ])))
+        );
+
+        $this->setResponses((new ResponseCollection([
+            (new Response())
+                ->setStatusCode(200)
+                ->setDescription('OK')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('value')
+                            ->setType(ParameterType::MIXED)
+                            ->setFormat(ParameterFormat::MIXED)
+                            ->setRequired(true)
+                    ])))),
+            (new Response())
+                ->setStatusCode(400)
+                ->setDescription('Bad request. Missing or invalid parameters.')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true)
+                    ])))),
+            (new Response())
+                ->setStatusCode(403)
+                ->setDescription('User is not allowed to read the data')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true)
+                    ])))),
+            (new Response())
+                ->setStatusCode(404)
+                ->setDescription('Key not found')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true)
+                    ])))),
+        ])));
     }
 }

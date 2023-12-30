@@ -12,11 +12,9 @@ final class ApplicationRequestEndpoint extends Endpoint
     public function __construct()
     {
         $this->setMethods(new MethodCollection(Method::GET, Method::POST, Method::PUT, Method::DELETE));
-        $this->setResponses(new ResponseCollection([
-            200 => new Response(
-                200,
-                'Depending on the request, the response will be different.'
-            ),
-        ]));
+
+        $this->setResponses(new ResponseCollection([(new Response())
+            ->setStatusCode(200)
+            ->setDescription('Depending on the request, the response will be different.')]));
     }
 }

@@ -6,20 +6,19 @@ use Tekkl\Shared\Struct\Struct;
 
 class Response extends Struct
 {
-    public function __construct(
-        protected int $statusCode,
-        protected string $description,
-        protected ?ResponseContent $content = null,
-    ) {}
+    protected int $statusCode;
+    protected string $description;
+    protected ?ResponseContent $content = null;
 
     public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
-    public function setStatusCode(int $statusCode): void
+    public function setStatusCode(int $statusCode): Response
     {
         $this->statusCode = $statusCode;
+        return $this;
     }
 
     public function getDescription(): string
@@ -27,9 +26,10 @@ class Response extends Struct
         return $this->description;
     }
 
-    public function setDescription(string $description): void
+    public function setDescription(string $description): Response
     {
         $this->description = $description;
+        return $this;
     }
 
     public function getContent(): ?ResponseContent
@@ -37,8 +37,9 @@ class Response extends Struct
         return $this->content;
     }
 
-    public function setContent(?ResponseContent $content): void
+    public function setContent(?ResponseContent $content): Response
     {
         $this->content = $content;
+        return $this;
     }
 }

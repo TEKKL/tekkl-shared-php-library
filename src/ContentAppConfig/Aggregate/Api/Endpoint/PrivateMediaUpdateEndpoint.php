@@ -19,113 +19,174 @@ final class PrivateMediaUpdateEndpoint extends PostEndpoint
     {
         parent::__construct();
         $this->setParameters(new RequestParameterCollection());
-        $this->setBody(new RequestBody(
-            true,
-            ContentType::MULTIPART_FORM_DATA,
-            ParameterType::OBJECT,
-            new ParameterCollection([
-                'media_id' => new Parameter('media_id', ParameterType::STRING, ParameterFormat::STRING, true),
-                'file' => new Parameter('file', ParameterType::STRING, ParameterFormat::BINARY, true),
-                'access_key' => new Parameter('access_key', ParameterType::STRING, ParameterFormat::STRING, true),
-            ])
-        ));
+        $this->setBody((new RequestBody())
+            ->setRequired(true)
+            ->setContentType(ContentType::APPLICATION_JSON)
+            ->setType(ParameterType::OBJECT)
+            ->setParameters((new ParameterCollection([
+                (new Parameter())
+                    ->setName('media_id')
+                    ->setType(ParameterType::STRING)
+                    ->setFormat(ParameterFormat::STRING)
+                    ->setRequired(true),
+                (new Parameter())
+                    ->setName('file')
+                    ->setType(ParameterType::STRING)
+                    ->setFormat(ParameterFormat::BINARY)
+                    ->setRequired(true),
+                (new Parameter())
+                    ->setName('access_key')
+                    ->setType(ParameterType::STRING)
+                    ->setFormat(ParameterFormat::STRING)
+                    ->setRequired(true)
+            ])))
+        );
         $this->setResponses(new ResponseCollection([
-            200 => new Response(
-                200,
-                'Successfully uploaded the file',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        'media' => new Parameter('media', ParameterType::OBJECT, ParameterFormat::OBJECT, true),
-                    ])
-                )
-            ),
-            400 => new Response(
-                400,
-                'Bad request. Missing or invalid parameters.',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-            403 => new Response(
-                403,
-                'Forbidden. The user is not allowed to upload/update files',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-            404 => new Response(
-                404,
-                'Media to update not found',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-            413 => new Response(
-                413,
-                'The file is too large',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-            415 => new Response(
-                415,
-                'The file type is not supported',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-            500 => new Response(
-                500,
-                'Unable to upload the file',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
-            507 => new Response(
-                507,
-                'Insufficient storage space',
-                new ResponseContent(
-                    ContentType::APPLICATION_JSON,
-                    ParameterType::OBJECT,
-                    new ParameterCollection([
-                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                    ])
-                )
-            ),
+            (new Response())
+                ->setStatusCode(200)
+                ->setDescription('Successfully uploaded the file')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('media')
+                            ->setType(ParameterType::OBJECT)
+                            ->setFormat(ParameterFormat::OBJECT)
+                            ->setRequired(true),
+                    ])))),
+            (new Response())
+                ->setStatusCode(400)
+                ->setDescription('Bad request. Missing or invalid parameters.')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true),
+                    ])))),
+            (new Response())
+                ->setStatusCode(403)
+                ->setDescription('Forbidden. The user is not allowed to upload/update files')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true),
+                    ])))),
+            (new Response())
+                ->setStatusCode(404)
+                ->setDescription('Media to update not found')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true),
+                    ])))),
+            (new Response())
+                ->setStatusCode(413)
+                ->setDescription('The file is too large')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true),
+                    ])))),
+            (new Response())
+                ->setStatusCode(415)
+                ->setDescription('The file type is not supported')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true),
+                    ])))),
+            (new Response())
+                ->setStatusCode(500)
+                ->setDescription('Unable to upload the file')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true),
+                    ])))),
+            (new Response())
+                ->setStatusCode(507)
+                ->setDescription('Insufficient storage space')
+                ->setContent((new ResponseContent())
+                    ->setContentType(ContentType::APPLICATION_JSON)
+                    ->setType(ParameterType::OBJECT)
+                    ->setProperties((new ParameterCollection([
+                        (new Parameter())
+                            ->setName('success')
+                            ->setType(ParameterType::BOOLEAN)
+                            ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('error')
+                            ->setType(ParameterType::STRING)
+                            ->setFormat(ParameterFormat::STRING)
+                            ->setRequired(true),
+                    ]))))
         ]));
+
     }
 }

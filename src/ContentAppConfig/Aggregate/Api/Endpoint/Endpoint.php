@@ -22,9 +22,10 @@ abstract class Endpoint extends Struct
         return $this->url;
     }
 
-    public function setUrl(string $url): void
+    public function setUrl(string $url): Endpoint
     {
         $this->url = $url;
+        return $this;
     }
 
     public function getMethods(): MethodCollection
@@ -32,9 +33,10 @@ abstract class Endpoint extends Struct
         return $this->methods;
     }
 
-    public function setMethods(MethodCollection $methods): void
+    public function setMethods(MethodCollection $methods): Endpoint
     {
         $this->methods = $methods;
+        return $this;
     }
 
     public function getResponses(): ResponseCollection
@@ -42,9 +44,10 @@ abstract class Endpoint extends Struct
         return $this->responses;
     }
 
-    public function setResponses(ResponseCollection $responses): void
+    public function setResponses(ResponseCollection $responses): Endpoint
     {
         $this->responses = $responses;
+        return $this;
     }
 
     public function getParameters(): ?RequestParameterCollection
@@ -52,9 +55,10 @@ abstract class Endpoint extends Struct
         return $this->parameters;
     }
 
-    public function setParameters(?RequestParameterCollection $parameters): void
+    public function setParameters(?RequestParameterCollection $parameters): Endpoint
     {
         $this->parameters = $parameters;
+        return $this;
     }
 
     public function getBody(): ?RequestBody
@@ -62,8 +66,9 @@ abstract class Endpoint extends Struct
         return $this->body;
     }
 
-    public function setBody(?RequestBody $body): void
+    public function setBody(?RequestBody $body): Endpoint
     {
         $this->body = $body;
+        return $this;
     }
 }
