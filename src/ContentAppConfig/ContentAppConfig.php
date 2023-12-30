@@ -12,6 +12,8 @@ use Tekkl\Shared\Struct\Struct;
 
 class ContentAppConfig extends Struct
 {
+    public const CONTENT_APP_CONFIG_FILE_NAME = '.content-app-config.json';
+
     protected array $data = [];
     protected JavascriptAssetCollection $javascriptAssets;
     protected CssAssetCollection $cssAssets;
