@@ -2,6 +2,8 @@
 
 namespace Tekkl\Shared\Struct;
 
+use ReflectionClass;
+
 /**
  * @template TElement
  * @implements \IteratorAggregate<array-key, TElement>
@@ -257,11 +259,23 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
     public function assign(array $options): static
     {
         $this->elements = [];
+        $isStruct = false;
+        $isEnum = false;
+        if ($this->getExpectedClass()) {
+            $isStruct = is_subclass_of($this->getExpectedClass(), Struct::class);
+            if (!$isStruct) {
+                $reflectionClass = new ReflectionClass($this->getExpectedClass());
+                $isEnum = $reflectionClass->isEnum();
+            }
+        }
         foreach ($options as $key => $element) {
-            if ($this->getExpectedClass()) {
+            if ($isStruct) {
                 $struct = new ($this->getExpectedClass());
                 $struct->assign($element);
                 $element = $struct;
+            }
+            if ($isEnum) {
+                $element = $this->getExpectedClass()::from($element);
             }
             $this->set($key, $element);
         }
