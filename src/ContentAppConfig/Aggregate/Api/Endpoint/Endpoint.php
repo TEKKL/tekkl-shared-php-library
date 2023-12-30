@@ -11,13 +11,11 @@ use Tekkl\Shared\Struct\Struct;
 
 abstract class Endpoint extends Struct
 {
-    public function __construct(
-        protected string $url,
-        protected MethodCollection $methods,
-        protected ResponseCollection $responses,
-        protected ?RequestParameterCollection $parameters = null,
-        protected ?RequestBody $body = null,
-    ) {}
+    protected string $url;
+    protected MethodCollection $methods;
+    protected ResponseCollection $responses;
+    protected ?RequestParameterCollection $parameters = null;
+    protected ?RequestBody $body = null;
 
     public function getUrl(): string
     {

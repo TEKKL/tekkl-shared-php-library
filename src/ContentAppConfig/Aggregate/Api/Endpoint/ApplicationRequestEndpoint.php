@@ -9,18 +9,14 @@ use Tekkl\Shared\ContentAppConfig\Aggregate\Api\Response\ResponseCollection;
 
 final class ApplicationRequestEndpoint extends Endpoint
 {
-    public function __construct(
-        protected string $url
-    ) {
-        parent::__construct(
-            $url,
-            new MethodCollection(Method::GET, Method::POST, Method::PUT, Method::DELETE),
-            new ResponseCollection([
-                200 => new Response(
-                    200,
-                    'Depending on the request, the response will be different.'
-                ),
-            ])
-        );
+    public function __construct()
+    {
+        $this->setMethods(new MethodCollection(Method::GET, Method::POST, Method::PUT, Method::DELETE));
+        $this->setResponses(new ResponseCollection([
+            200 => new Response(
+                200,
+                'Depending on the request, the response will be different.'
+            ),
+        ]));
     }
 }

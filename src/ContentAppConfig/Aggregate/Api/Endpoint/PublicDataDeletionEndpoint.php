@@ -15,70 +15,67 @@ use Tekkl\Shared\ContentAppConfig\Aggregate\Api\Response\ResponseContent;
 
 final class PublicDataDeletionEndpoint extends PostEndpoint
 {
-    public function __construct(
-        protected string $url,
-    ) {
-        parent::__construct(
-            $url,
-            new RequestParameterCollection(),
-            new RequestBody(
-                true,
-                ContentType::APPLICATION_JSON,
-                ParameterType::OBJECT,
-                new ParameterCollection([
-                    'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, false),
-                    'access_key' => new Parameter('access_key', ParameterType::STRING, ParameterFormat::STRING, true),
-                ])
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setParameters(new RequestParameterCollection());
+        $this->setBody(new RequestBody(
+            true,
+            ContentType::APPLICATION_JSON,
+            ParameterType::OBJECT,
+            new ParameterCollection([
+                'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, false),
+                'access_key' => new Parameter('access_key', ParameterType::STRING, ParameterFormat::STRING, true),
+            ])
+        ));
+        $this->setResponses(new ResponseCollection([
+            200 => new Response(
+                200,
+                'OK',
+                new ResponseContent(
+                    ContentType::APPLICATION_JSON,
+                    ParameterType::OBJECT,
+                    new ParameterCollection([
+                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
+                    ])
+                )
             ),
-            new ResponseCollection([
-                200 => new Response(
-                    200,
-                    'OK',
-                    new ResponseContent(
-                        ContentType::APPLICATION_JSON,
-                        ParameterType::OBJECT,
-                        new ParameterCollection([
-                            'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                        ])
-                    )
-                ),
-                400 => new Response(
-                    400,
-                    'Bad request. Missing or invalid parameters.',
-                    new ResponseContent(
-                        ContentType::APPLICATION_JSON,
-                        ParameterType::OBJECT,
-                        new ParameterCollection([
-                            'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, true),
-                            'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                        ])
-                    )
-                ),
-                403 => new Response(
-                    403,
-                    'User is not allowed to delete the data',
-                    new ResponseContent(
-                        ContentType::APPLICATION_JSON,
-                        ParameterType::OBJECT,
-                        new ParameterCollection([
-                            'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, true),
-                            'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                        ])
-                    )
-                ),
-                500 => new Response(
-                    500,
-                    'Unable to delete the data',
-                    new ResponseContent(
-                        ContentType::APPLICATION_JSON,
-                        ParameterType::OBJECT,
-                        new ParameterCollection([
-                            'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
-                            'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
-                        ])
-                    )
-                ),
-            ]),
-        );
+            400 => new Response(
+                400,
+                'Bad request. Missing or invalid parameters.',
+                new ResponseContent(
+                    ContentType::APPLICATION_JSON,
+                    ParameterType::OBJECT,
+                    new ParameterCollection([
+                        'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, true),
+                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
+                    ])
+                )
+            ),
+            403 => new Response(
+                403,
+                'User is not allowed to delete the data',
+                new ResponseContent(
+                    ContentType::APPLICATION_JSON,
+                    ParameterType::OBJECT,
+                    new ParameterCollection([
+                        'key' => new Parameter('key', ParameterType::STRING, ParameterFormat::STRING, true),
+                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
+                    ])
+                )
+            ),
+            500 => new Response(
+                500,
+                'Unable to delete the data',
+                new ResponseContent(
+                    ContentType::APPLICATION_JSON,
+                    ParameterType::OBJECT,
+                    new ParameterCollection([
+                        'success' => new Parameter('success', ParameterType::BOOLEAN, ParameterFormat::BOOLEAN, true),
+                        'error' => new Parameter('error', ParameterType::STRING, ParameterFormat::STRING, true),
+                    ])
+                )
+            ),
+        ]));
     }
 }

@@ -9,16 +9,8 @@ use Tekkl\Shared\ContentAppConfig\Aggregate\Api\Response\ResponseCollection;
 
 abstract class DeleteEndpoint extends Endpoint
 {
-    public function __construct(
-        protected string $url,
-        RequestParameterCollection $parameters,
-        ResponseCollection $responses,
-    ) {
-        parent::__construct(
-            $url,
-            new MethodCollection(Method::DELETE),
-            $responses,
-            $parameters
-        );
+    public function __construct()
+    {
+        $this->setMethods(new MethodCollection(Method::DELETE));
     }
 }
