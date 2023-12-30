@@ -7,7 +7,6 @@ use Tekkl\Shared\ContentAppConfig\Aggregate\CssAsset\CssAssetCollection;
 use Tekkl\Shared\ContentAppConfig\Aggregate\CssVariable\CssVariableCollection;
 use Tekkl\Shared\ContentAppConfig\Aggregate\Font\FontCollection;
 use Tekkl\Shared\ContentAppConfig\Aggregate\JavascriptAsset\JavascriptAssetCollection;
-use Tekkl\Shared\ContentItem\ContentItemInterface;
 use Tekkl\Shared\Struct\Struct;
 
 class ContentAppConfig extends Struct

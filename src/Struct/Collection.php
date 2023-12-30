@@ -253,4 +253,18 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
             );
         }
     }
+
+    public function assign(array $options): static
+    {
+        $this->elements = [];
+        foreach ($options as $key => $element) {
+            if ($this->getExpectedClass()) {
+                $struct = new ($this->getExpectedClass());
+                $struct->assign($element);
+                $element = $struct;
+            }
+            $this->set($key, $element);
+        }
+        return $this;
+    }
 }

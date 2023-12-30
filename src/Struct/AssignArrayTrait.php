@@ -44,7 +44,9 @@ trait AssignArrayTrait
             // Convert arrays to Structs
             $reflectionType = new ReflectionClass($type->getName());
             if (is_subclass_of($reflectionType->getName(), Struct::class) && is_array($options[$property->getName()])) {
-                $options[$property->getName()] = $type->getName()::fromArray($options[$property->getName()]);
+                $struct = new ($type->getName());
+                $struct->assign($options[$property->getName()]);
+                $options[$property->getName()] = $struct;
             }
             // Convert enum values to enums
             if ($reflectionType->isEnum()) {
