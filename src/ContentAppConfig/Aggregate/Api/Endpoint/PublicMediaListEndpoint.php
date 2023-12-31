@@ -12,6 +12,7 @@ use Tekkl\Shared\ContentAppConfig\Aggregate\Api\Request\RequestParameterCollecti
 use Tekkl\Shared\ContentAppConfig\Aggregate\Api\Response\Response;
 use Tekkl\Shared\ContentAppConfig\Aggregate\Api\Response\ResponseCollection;
 use Tekkl\Shared\ContentAppConfig\Aggregate\Api\Response\ResponseContent;
+use Tekkl\Shared\Security\AccessToken\AccessTokenInterface;
 
 final class PublicMediaListEndpoint extends PostEndpoint
 {
@@ -35,7 +36,7 @@ final class PublicMediaListEndpoint extends PostEndpoint
                     ->setFormat(ParameterFormat::INT32)
                     ->setRequired(false),
                 (new Parameter())
-                    ->setName('access_key')
+                    ->setName(AccessTokenInterface::PARAM_ACCESS_TOKEN)
                     ->setType(ParameterType::STRING)
                     ->setFormat(ParameterFormat::STRING)
                     ->setRequired(true)
