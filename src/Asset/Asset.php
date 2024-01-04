@@ -10,24 +10,26 @@ class Asset extends Struct
     protected string $name;
     protected string $url;
 
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): Asset
+    {
+        $this->type = $type;
+        return $this;
+    }
 
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): Asset
     {
         $this->name = $name;
-    }
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): void
-    {
-        $this->type = $type;
+        return $this;
     }
 
     public function getUrl(): string
@@ -35,8 +37,9 @@ class Asset extends Struct
         return $this->url;
     }
 
-    public function setUrl(string $url): void
+    public function setUrl(string $url): Asset
     {
         $this->url = $url;
+        return $this;
     }
 }

@@ -13,8 +13,9 @@ class CssAsset extends Asset
         return $this->version;
     }
 
-    public function setVersion(string $version): void
+    public function setVersion(string $version): CssAsset
     {
         $this->version = $version;
+        return $this;
     }
 }

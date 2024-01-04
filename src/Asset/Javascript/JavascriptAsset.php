@@ -13,8 +13,9 @@ class JavascriptAsset extends Asset
         return $this->version;
     }
 
-    public function setVersion(string $version): void
+    public function setVersion(string $version): JavascriptAsset
     {
         $this->version = $version;
+        return $this;
     }
 }

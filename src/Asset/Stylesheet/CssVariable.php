@@ -14,9 +14,10 @@ class CssVariable extends Struct
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): CssVariable
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getValue(): string
@@ -24,8 +25,9 @@ class CssVariable extends Struct
         return $this->value;
     }
 
-    public function setValue(string $value): void
+    public function setValue(string $value): CssVariable
     {
         $this->value = $value;
+        return $this;
     }
 }
