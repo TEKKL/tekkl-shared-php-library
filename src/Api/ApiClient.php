@@ -4,7 +4,7 @@ namespace Tekkl\Shared\Api;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use Tekkl\Shared\ContentAppConfig\ContentAppConfig;
+use Tekkl\Shared\ContentApp\Config\ContentAppConfig;
 use Tekkl\Shared\Security\AccessToken\AccessTokenInterface;
 
 class ApiClient
