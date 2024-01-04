@@ -14,31 +14,12 @@ class ContentAppConfig extends Struct
     public const CONTENT_APP_CONFIG_FILE_NAME = '.content-app-config.json';
 
     protected array $data = [];
-    protected JavascriptAssetCollection $javascriptAssets;
-    protected CssAssetCollection $cssAssets;
+    protected JavascriptAssetCollection $javascriptLibraries;
+    protected CssAssetCollection $cssLibraries;
+
     protected CssVariableCollection $cssVariables;
     protected FontCollection $fonts;
     protected Api $api;
-
-    public function getJavascriptAssets(): JavascriptAssetCollection
-    {
-        return $this->javascriptAssets;
-    }
-
-    public function setJavascriptAssets(JavascriptAssetCollection $javascriptAssets): void
-    {
-        $this->javascriptAssets = $javascriptAssets;
-    }
-
-    public function getCssAssets(): CssAssetCollection
-    {
-        return $this->cssAssets;
-    }
-
-    public function setCssAssets(CssAssetCollection $cssAssets): void
-    {
-        $this->cssAssets = $cssAssets;
-    }
 
     public function set(string $key, $value): void
     {
@@ -60,24 +41,32 @@ class ContentAppConfig extends Struct
         return $this->data;
     }
 
-    public function getFonts(): FontCollection
+    public function setData(array $data): ContentAppConfig
     {
-        return $this->fonts;
+        $this->data = $data;
+        return $this;
     }
 
-    public function setFonts(FontCollection $fonts): void
+    public function getJavascriptLibraries(): JavascriptAssetCollection
     {
-        $this->fonts = $fonts;
+        return $this->javascriptLibraries;
     }
 
-    public function getApi(): Api
+    public function setJavascriptLibraries(JavascriptAssetCollection $javascriptLibraries): ContentAppConfig
     {
-        return $this->api;
+        $this->javascriptLibraries = $javascriptLibraries;
+        return $this;
     }
 
-    public function setApi(Api $api): void
+    public function getCssLibraries(): CssAssetCollection
     {
-        $this->api = $api;
+        return $this->cssLibraries;
+    }
+
+    public function setCssLibraries(CssAssetCollection $cssLibraries): ContentAppConfig
+    {
+        $this->cssLibraries = $cssLibraries;
+        return $this;
     }
 
     public function getCssVariables(): CssVariableCollection
@@ -85,8 +74,31 @@ class ContentAppConfig extends Struct
         return $this->cssVariables;
     }
 
-    public function setCssVariables(CssVariableCollection $cssVariables): void
+    public function setCssVariables(CssVariableCollection $cssVariables): ContentAppConfig
     {
         $this->cssVariables = $cssVariables;
+        return $this;
+    }
+
+    public function getFonts(): FontCollection
+    {
+        return $this->fonts;
+    }
+
+    public function setFonts(FontCollection $fonts): ContentAppConfig
+    {
+        $this->fonts = $fonts;
+        return $this;
+    }
+
+    public function getApi(): Api
+    {
+        return $this->api;
+    }
+
+    public function setApi(Api $api): ContentAppConfig
+    {
+        $this->api = $api;
+        return $this;
     }
 }
