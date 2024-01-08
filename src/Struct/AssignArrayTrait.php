@@ -37,6 +37,15 @@ trait AssignArrayTrait
             if ($type?->getName() === DateTimeInterface::class && is_string($options[$property->getName()])) {
                 $options[$property->getName()] = new DateTimeImmutable($options[$property->getName()]);;
             }
+            if ($type?->getName() === 'bool' && is_string($options[$property->getName()])) {
+                $options[$property->getName()] = (bool) $options[$property->getName()];
+            }
+            if ($type?->getName() === 'int' && is_string($options[$property->getName()])) {
+                $options[$property->getName()] = (int) $options[$property->getName()];
+            }
+            if ($type?->getName() === 'float' && is_string($options[$property->getName()])) {
+                $options[$property->getName()] = (float) $options[$property->getName()];
+            }
             // We are done dealing with built-in types
             if ($type?->isBuiltin() !== false) {
                 continue;
