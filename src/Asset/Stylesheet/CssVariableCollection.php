@@ -6,6 +6,15 @@ use Tekkl\Shared\Struct\Collection;
 
 class CssVariableCollection extends Collection
 {
+    /**
+     * @param CssVariable $element
+     */
+    public function add($element): void
+    {
+        $this->validateType($element);
+        parent::set($element->getName(), $element);
+    }
+
     protected function getExpectedClass(): string
     {
         return CssVariable::class;
