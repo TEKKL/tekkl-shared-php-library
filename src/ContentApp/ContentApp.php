@@ -12,21 +12,21 @@ use Tekkl\Shared\Struct\Struct;
 
 class ContentApp extends Struct
 {
-    protected string $path;
     protected string $name;
     protected ?string $description = null;
     protected ContentAppViewCollection $views;
-
     protected ContentAppBuildCollection $builds;
+    protected ?string $path = null;
 
-    public function getPath(): string
+    public function getPath(): ?string
     {
         return $this->path;
     }
 
-    public function setPath(string $path): void
+    public function setPath(?string $path): ContentApp
     {
         $this->path = $path;
+        return $this;
     }
 
     public function getName(): string
@@ -34,9 +34,10 @@ class ContentApp extends Struct
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): ContentApp
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getDescription(): ?string
@@ -44,9 +45,10 @@ class ContentApp extends Struct
         return $this->description;
     }
 
-    public function setDescription(?string $description): void
+    public function setDescription(?string $description): ContentApp
     {
         $this->description = $description;
+        return $this;
     }
 
     public function getViews(): ContentAppViewCollection
@@ -54,9 +56,10 @@ class ContentApp extends Struct
         return $this->views;
     }
 
-    public function setViews(ContentAppViewCollection $views): void
+    public function setViews(ContentAppViewCollection $views): ContentApp
     {
         $this->views = $views;
+        return $this;
     }
 
     public function getBuilds(): ContentAppBuildCollection
@@ -64,9 +67,10 @@ class ContentApp extends Struct
         return $this->builds;
     }
 
-    public function setBuilds(ContentAppBuildCollection $builds): void
+    public function setBuilds(ContentAppBuildCollection $builds): ContentApp
     {
         $this->builds = $builds;
+        return $this;
     }
 
     public function getBuild(string $build): ContentAppBuild
