@@ -8,5 +8,5 @@ interface AccessTokenInterface
     public const PARAM_CONTENT_APP_VIEW = 'X-ContentApp-View';
     public function getUserId(): ?string;
     public function getContentItemId(): string;
-    public function getView(): string;
+    public function getView(): ?string;
 }
