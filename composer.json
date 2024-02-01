@@ -2,7 +2,7 @@
   "name": "tekkl/shared-php-library",
   "description": "TEKKL Shared PHP Library",
   "type": "project",
-  "license": "(c) TEKKL GmbH. All rights reserved.",
+  "license": "MIT",
   "version": "1.0.0",
   "authors": [
     {
