@@ -9,6 +9,7 @@ class ContentAppView extends Struct
     protected string $name;
     protected ?string $label = null;
     protected ?string $publicDir = null;
+    protected ?string $indexFile = null;
     protected ?string $requestPath = null;
 
     protected ?string $build = null;
@@ -61,5 +62,16 @@ class ContentAppView extends Struct
     public function setRequestPath(?string $requestPath): void
     {
         $this->requestPath = $requestPath;
+    }
+
+    public function getIndexFile(): ?string
+    {
+        return $this->indexFile;
+    }
+
+    public function setIndexFile(?string $indexFile): ContentAppView
+    {
+        $this->indexFile = $indexFile;
+        return $this;
     }
 }
