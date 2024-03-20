@@ -4,6 +4,9 @@ namespace Tekkl\Shared\Api\Parameter;
 
 use Tekkl\Shared\Struct\Collection;
 
+/**
+ * @extends Collection<Parameter>
+ */
 class ParameterCollection extends Collection
 {
     /**

@@ -9,7 +9,7 @@ trait ExtendableTrait
      *
      * @var Struct[]
      */
-    protected $extensions = [];
+    protected array $extensions = [];
 
     /**
      * Adds a new extension struct into the class storage.
@@ -59,7 +59,7 @@ trait ExtendableTrait
 
     public function hasExtensionOfType(string $name, string $type): bool
     {
-        return $this->hasExtension($name) && \get_class($this->getExtension($name)) === $type;
+        return $this->getExtension($name) && \get_class($this->getExtension($name)) === $type;
     }
 
     /**
@@ -73,6 +73,9 @@ trait ExtendableTrait
         return $this->extensions;
     }
 
+    /**
+     * @param Struct[] $extensions
+     */
     public function setExtensions(array $extensions): void
     {
         $this->extensions = $extensions;

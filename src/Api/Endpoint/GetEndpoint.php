@@ -9,6 +9,6 @@ abstract class GetEndpoint extends Endpoint
 {
     public function __construct()
     {
-        $this->setMethods(new MethodCollection(Method::GET));
+        $this->setMethods(new MethodCollection([Method::GET]));
     }
 }

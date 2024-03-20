@@ -13,12 +13,12 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
     /**
      * @var array<array-key, TElement>
      */
-    protected $elements = [];
+    protected array $elements = [];
 
     /**
      * @param array<TElement> $elements
      */
-    public function __construct(iterable $elements = [])
+    final public function __construct(iterable $elements = [])
     {
         foreach ($elements as $key => $element) {
             $this->set($key, $element);
@@ -51,6 +51,9 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
         }
     }
 
+    /**
+     * @param Collection<TElement> $collection
+     */
     public function merge(self $collection): void
     {
         /** @var TElement $entity */
@@ -64,7 +67,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
      *
      * @return TElement|null
      */
-    public function get($key)
+    public function get(string|int $key)
     {
         if ($this->has($key)) {
             return $this->elements[$key];
@@ -94,13 +97,13 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
     /**
      * @param array-key $key
      */
-    public function has($key): bool
+    public function has(string|int $key): bool
     {
         return \array_key_exists($key, $this->elements);
     }
 
     /**
-     * @return list<mixed>
+     * @return array
      */
     public function map(\Closure $closure): array
     {
@@ -112,7 +115,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
      *
      * @return mixed|null
      */
-    public function reduce(\Closure $closure, $initial = null)
+    public function reduce(\Closure $closure, mixed $initial = null)
     {
         return array_reduce($this->elements, $closure, $initial);
     }
@@ -135,7 +138,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
      *
      * @return static
      */
-    public function filterInstance(string $class)
+    public function filterInstance(string $class): static
     {
         return $this->filter(static function ($item) use ($class) {
             return $item instanceof $class;
@@ -145,7 +148,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
     /**
      * @return static
      */
-    public function filter(\Closure $closure)
+    public function filter(\Closure $closure): static
     {
         return $this->createNew(array_filter($this->elements, $closure));
     }
@@ -153,7 +156,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
     /**
      * @return static
      */
-    public function slice(int $offset, ?int $length = null)
+    public function slice(int $offset, ?int $length = null): static
     {
         return $this->createNew(\array_slice($this->elements, $offset, $length, true));
     }
@@ -166,9 +169,6 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
         return $this->elements;
     }
 
-    /**
-     * @return list<TElement>
-     */
     public function jsonSerialize(array $options = []): array
     {
         return $this->jsonSerializeConvertArray($this->elements, $options);
@@ -178,7 +178,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
      * return ($this->elements is non-empty-array ? TElement : null) does not work as return type for now.
      * Possible with PHPStan 1.9.0 see https://github.com/phpstan/phpstan/issues/7110
      */
-    public function first()
+    public function first(): ?Struct
     {
         return array_values($this->elements)[0] ?? null;
     }
@@ -195,7 +195,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
      * return ($this->elements is non-empty-array ? TElement : null) does not work as return type for now.
      * Possible with PHPStan 1.9.0 see https://github.com/phpstan/phpstan/issues/7110
      */
-    public function last()
+    public function last(): ?Struct
     {
         return array_values($this->elements)[\count($this->elements) - 1] ?? null;
     }
@@ -203,7 +203,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
     /**
      * @param array-key $key
      */
-    public function remove($key): void
+    public function remove(string|int $key): void
     {
         unset($this->elements[$key]);
     }
@@ -232,7 +232,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
      *
      * @return static
      */
-    protected function createNew(iterable $elements = [])
+    protected function createNew(iterable $elements = []): static
     {
         return new static($elements);
     }
@@ -256,6 +256,9 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
         }
     }
 
+    /**
+     * @param array<array-key, mixed> $options
+     */
     public function assign(array $options): static
     {
         $this->elements = [];
@@ -275,6 +278,7 @@ abstract class Collection extends Struct implements \IteratorAggregate, \Countab
                 $element = $struct;
             }
             if ($isEnum) {
+                /** @phpstan-ignore-next-line */
                 $element = $this->getExpectedClass()::from($element);
             }
             $this->set($key, $element);

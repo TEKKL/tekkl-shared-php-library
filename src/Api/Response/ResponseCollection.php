@@ -4,6 +4,9 @@ namespace Tekkl\Shared\Api\Response;
 
 use Tekkl\Shared\Struct\Collection;
 
+/**
+ * @extends Collection<Response>
+ */
 class ResponseCollection extends Collection
 {
     public function add($element): void

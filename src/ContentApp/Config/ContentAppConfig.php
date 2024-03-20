@@ -13,6 +13,7 @@ class ContentAppConfig extends Struct
 {
     public const CONTENT_APP_CONFIG_FILE_NAME = '.content-app-config.json';
 
+    /** @var array<array-key, mixed>  */
     protected array $data = [];
     protected JavascriptAssetCollection $javascriptLibraries;
     protected CssAssetCollection $cssLibraries;
@@ -21,12 +22,12 @@ class ContentAppConfig extends Struct
     protected FontCollection $fonts;
     protected Api $api;
 
-    public function set(string $key, $value): void
+    public function set(string $key, mixed $value): void
     {
         $this->data[$key] = $value;
     }
 
-    public function get(string $key)
+    public function get(string $key): mixed
     {
         return $this->data[$key] ?? null;
     }
@@ -41,6 +42,9 @@ class ContentAppConfig extends Struct
         return $this->data;
     }
 
+    /**
+     * @param array<array-key, mixed> $data
+     */
     public function setData(array $data): ContentAppConfig
     {
         $this->data = $data;

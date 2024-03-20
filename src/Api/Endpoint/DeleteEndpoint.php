@@ -11,6 +11,6 @@ abstract class DeleteEndpoint extends Endpoint
 {
     public function __construct()
     {
-        $this->setMethods(new MethodCollection(Method::DELETE));
+        $this->setMethods(new MethodCollection([Method::DELETE]));
     }
 }

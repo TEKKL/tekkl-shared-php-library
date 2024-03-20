@@ -7,15 +7,18 @@ use Tekkl\Shared\Api\Request\MethodCollection;
 use Tekkl\Shared\Api\Request\RequestBody;
 use Tekkl\Shared\Api\Request\RequestParameterCollection;
 use Tekkl\Shared\Api\Response\ResponseCollection;
+use Tekkl\Shared\Struct\JsonSerializableTrait;
 use Tekkl\Shared\Struct\Struct;
 
-abstract class Endpoint extends Struct
+abstract class Endpoint
 {
+    use JsonSerializableTrait;
     protected string $url;
     protected MethodCollection $methods;
     protected ResponseCollection $responses;
     protected ?RequestParameterCollection $parameters = null;
     protected ?RequestBody $body = null;
+
 
     public function getUrl(): string
     {

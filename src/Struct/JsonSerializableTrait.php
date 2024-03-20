@@ -8,11 +8,18 @@ trait JsonSerializableTrait
     public const OPTION_SKIP_EMPTY_ARRAYS = 'skipEmptyArrays';
     public const OPTION_SKIP_EMPTY_EXTENSIONS = 'skipEmptyExtensions';
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function jsonSerialize(array $options = []): array
     {
         return $this->jsonSerializeConvertArray(get_object_vars($this), $options);
     }
 
+    /**
+     * @param array<string, mixed> $array
+     * @param array<string, mixed> $options
+     */
     protected function jsonSerializeConvertArray(array $array, array $options): array
     {
         $toDelete = [];
@@ -36,21 +43,24 @@ trait JsonSerializableTrait
         return $array;
     }
 
-    protected function jsonSerializeConvertDateTimePropertyToJsonStringRepresentation(&$value): void
+    protected function jsonSerializeConvertDateTimePropertyToJsonStringRepresentation(mixed &$value): void
     {
         if ($value instanceof \DateTimeInterface) {
             $value = $value->format(\DateTime::RFC3339_EXTENDED);
         }
     }
 
-    protected function jsonSerializeConvertEnumToValueRepresentation(&$value): void
+    protected function jsonSerializeConvertEnumToValueRepresentation(mixed &$value): void
     {
         if ($value instanceof \BackedEnum) {
             $value = $value->value;
         }
     }
 
-    protected function jsonSerializeConvertStructToArrayRepresentation(&$value, array $options): void
+    /**
+     * @param array<string, mixed> $options
+     */
+    protected function jsonSerializeConvertStructToArrayRepresentation(mixed &$value, array $options): void
     {
         if ($value instanceof Struct) {
             $value = $value->jsonSerialize($options);

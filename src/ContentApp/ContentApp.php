@@ -96,6 +96,9 @@ class ContentApp extends Struct
     public function getViewBuild(string $view): ContentAppBuild
     {
         $view = $this->getView($view);
+        if (!$view->getBuild()) {
+            throw new \RuntimeException('The view "' . $view->getName() . '" does not define a build.');
+        }
         return $this->getBuild($view->getBuild());
     }
 }

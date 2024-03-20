@@ -10,18 +10,8 @@ use Tekkl\Shared\Api\Response\ResponseCollection;
 
 abstract class PutEndpoint extends Endpoint
 {
-    public function __construct(
-        protected string $url,
-        RequestParameterCollection $parameters,
-        RequestBody $body,
-        ResponseCollection $responses,
-    ) {
-        parent::__construct(
-            $url,
-            new MethodCollection(Method::PUT),
-            $responses,
-            $parameters,
-            $body
-        );
+    public function __construct()
+    {
+        $this->setMethods(new MethodCollection([Method::PUT]));
     }
 }

@@ -12,6 +12,6 @@ abstract class PostEndpoint extends Endpoint
 {
     public function __construct()
     {
-        $this->setMethods(new MethodCollection(Method::POST));
+        $this->setMethods(new MethodCollection([Method::POST]));
     }
 }

@@ -4,6 +4,9 @@ namespace Tekkl\Shared\Asset\Stylesheet;
 
 use Tekkl\Shared\Struct\Collection;
 
+/**
+ * @extends Collection<CssVariable>
+ */
 class CssVariableCollection extends Collection
 {
     /**
