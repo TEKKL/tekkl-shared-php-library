@@ -10,9 +10,8 @@ use Tekkl\Shared\Api\Response\ResponseCollection;
 use Tekkl\Shared\Struct\JsonSerializableTrait;
 use Tekkl\Shared\Struct\Struct;
 
-abstract class Endpoint
+abstract class Endpoint extends Struct
 {
-    use JsonSerializableTrait;
     protected string $url;
     protected MethodCollection $methods;
     protected ResponseCollection $responses;
