@@ -8,7 +8,7 @@ class BuildNotFoundException extends \RuntimeException
 {
     public function __construct(string $build, ContentApp $contentApp, int $code = 0, \Throwable $previous = null)
     {
-        $message = 'The content app "' . $contentApp->getName() . '" does not container the build "' . $build . '".';
+        $message = 'The content app "' . $contentApp->getName() . '" does not contain the build "' . $build . '".';
         parent::__construct($message, $code, $previous);
     }
 }
