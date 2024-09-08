@@ -2,10 +2,10 @@
 
 namespace Tekkl\Shared\Element;
 
-use Tekkl\Shared\ContentApp\ContentApp;
+use Tekkl\ContentAppServer\ContentApp\Snapshot\ApplicationSnapshot;
 
 interface ElementInterface
 {
     public function getElementId(): string;
-    public function getContentApp(): ContentApp;
+    public function getApplicationSnapshot(): ApplicationSnapshot;
 }
