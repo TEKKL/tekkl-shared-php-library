@@ -11,7 +11,12 @@ use Tekkl\Shared\Struct\Struct;
 
 class ContentAppConfig extends Struct
 {
-    public const CONTENT_APP_CONFIG_FILE_NAME = '.content-app-config.json';
+    public const CONTENT_APP_CONFIG_DIRECTORY = '.content-app-config';
+    public const JAVASCRIPT_ASSETS_FILE = 'javascript-assets.json';
+    public const CSS_ASSETS_FILE = 'css-assets.json';
+    public const CSS_VARIABLES_FILE = 'css-variables.json';
+    public const FONTS_FILE = 'fonts.json';
+    public const API_FILE = 'api.json';
 
     /** @var array<array-key, mixed>  */
     protected array $data = [];

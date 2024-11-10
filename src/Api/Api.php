@@ -19,38 +19,29 @@ use Tekkl\Shared\Api\Endpoint\PublicMediaUpdateEndpoint;
 use Tekkl\Shared\Api\Endpoint\PublicMediaUploadEndpoint;
 use Tekkl\Shared\Struct\Struct;
 
-final class
-
-Api extends Struct
+final class Api extends Struct
 {
     protected string $name;
     protected string $description;
     protected string $version;
 
-    protected ApplicationRequestEndpointCollection $applicationRequestEndpoints;
-    protected PublicDataReadEndpoint $publicDataReadEndpoint;
-    protected PublicDataUpsertionEndpoint $publicDataUpsertionEndpoint;
-    protected PublicDataDeletionEndpoint $publicDataDeletionEndpoint;
-    protected PrivateDataReadEndpoint $privateDataReadEndpoint;
-    protected PrivateDataUpsertionEndpoint $privateDataUpsertionEndpoint;
-    protected PrivateDataDeletionEndpoint $privateDataDeletionEndpoint;
-    protected PublicMediaUploadEndpoint $publicMediaUploadEndpoint;
-    protected PublicMediaUpdateEndpoint $publicMediaUpdateEndpoint;
-    protected PublicMediaListEndpoint $publicMediaListEndpoint;
-    protected PublicMediaDeletionEndpoint $publicMediaDeletionEndpoint;
-    protected PrivateMediaUploadEndpoint $privateMediaUploadEndpoint;
-    protected PrivateMediaUpdateEndpoint $privateMediaUpdateEndpoint;
-    protected PrivateMediaListEndpoint $privateMediaListEndpoint;
-    protected PrivateMediaDeletionEndpoint $privateMediaDeletionEndpoint;
+    protected ApplicationRequestEndpointCollection $applicationRequest;
+    protected PublicDataReadEndpoint $publicRead;
+    protected PublicDataUpsertionEndpoint $publicUpsert;
+    protected PublicDataDeletionEndpoint $publicDelete;
+    protected PrivateDataReadEndpoint $privateRead;
+    protected PrivateDataUpsertionEndpoint $privateUpsert;
+    protected PrivateDataDeletionEndpoint $privateDelete;
 
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): Api
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getDescription(): string
@@ -58,9 +49,10 @@ Api extends Struct
         return $this->description;
     }
 
-    public function setDescription(string $description): void
+    public function setDescription(string $description): Api
     {
         $this->description = $description;
+        return $this;
     }
 
     public function getVersion(): string
@@ -68,158 +60,86 @@ Api extends Struct
         return $this->version;
     }
 
-    public function setVersion(string $version): void
+    public function setVersion(string $version): Api
     {
         $this->version = $version;
+        return $this;
     }
 
-    public function getApplicationRequestEndpoints(): ApplicationRequestEndpointCollection
+    public function getApplicationRequest(): ApplicationRequestEndpointCollection
     {
-        return $this->applicationRequestEndpoints;
+        return $this->applicationRequest;
     }
 
-    public function setApplicationRequestEndpoints(ApplicationRequestEndpointCollection $applicationRequestEndpoints): void
+    public function setApplicationRequest(ApplicationRequestEndpointCollection $applicationRequest): Api
     {
-        $this->applicationRequestEndpoints = $applicationRequestEndpoints;
+        $this->applicationRequest = $applicationRequest;
+        return $this;
     }
 
-    public function getPublicDataReadEndpoint(): PublicDataReadEndpoint
+    public function getPublicRead(): PublicDataReadEndpoint
     {
-        return $this->publicDataReadEndpoint;
+        return $this->publicRead;
     }
 
-    public function setPublicDataReadEndpoint(PublicDataReadEndpoint $publicDataReadEndpoint): void
+    public function setPublicRead(PublicDataReadEndpoint $publicRead): Api
     {
-        $this->publicDataReadEndpoint = $publicDataReadEndpoint;
+        $this->publicRead = $publicRead;
+        return $this;
     }
 
-    public function getPublicDataUpsertionEndpoint(): PublicDataUpsertionEndpoint
+    public function getPublicUpsert(): PublicDataUpsertionEndpoint
     {
-        return $this->publicDataUpsertionEndpoint;
+        return $this->publicUpsert;
     }
 
-    public function setPublicDataUpsertionEndpoint(PublicDataUpsertionEndpoint $publicDataUpsertionEndpoint): void
+    public function setPublicUpsert(PublicDataUpsertionEndpoint $publicUpsert): Api
     {
-        $this->publicDataUpsertionEndpoint = $publicDataUpsertionEndpoint;
+        $this->publicUpsert = $publicUpsert;
+        return $this;
     }
 
-    public function getPublicDataDeletionEndpoint(): PublicDataDeletionEndpoint
+    public function getPublicDelete(): PublicDataDeletionEndpoint
     {
-        return $this->publicDataDeletionEndpoint;
+        return $this->publicDelete;
     }
 
-    public function setPublicDataDeletionEndpoint(PublicDataDeletionEndpoint $publicDataDeletionEndpoint): void
+    public function setPublicDelete(PublicDataDeletionEndpoint $publicDelete): Api
     {
-        $this->publicDataDeletionEndpoint = $publicDataDeletionEndpoint;
+        $this->publicDelete = $publicDelete;
+        return $this;
     }
 
-    public function getPrivateDataReadEndpoint(): PrivateDataReadEndpoint
+    public function getPrivateRead(): PrivateDataReadEndpoint
     {
-        return $this->privateDataReadEndpoint;
+        return $this->privateRead;
     }
 
-    public function setPrivateDataReadEndpoint(PrivateDataReadEndpoint $privateDataReadEndpoint): void
+    public function setPrivateRead(PrivateDataReadEndpoint $privateRead): Api
     {
-        $this->privateDataReadEndpoint = $privateDataReadEndpoint;
+        $this->privateRead = $privateRead;
+        return $this;
     }
 
-    public function getPrivateDataUpsertionEndpoint(): PrivateDataUpsertionEndpoint
+    public function getPrivateUpsert(): PrivateDataUpsertionEndpoint
     {
-        return $this->privateDataUpsertionEndpoint;
+        return $this->privateUpsert;
     }
 
-    public function setPrivateDataUpsertionEndpoint(PrivateDataUpsertionEndpoint $privateDataUpsertionEndpoint): void
+    public function setPrivateUpsert(PrivateDataUpsertionEndpoint $privateUpsert): Api
     {
-        $this->privateDataUpsertionEndpoint = $privateDataUpsertionEndpoint;
+        $this->privateUpsert = $privateUpsert;
+        return $this;
     }
 
-    public function getPrivateDataDeletionEndpoint(): PrivateDataDeletionEndpoint
+    public function getPrivateDelete(): PrivateDataDeletionEndpoint
     {
-        return $this->privateDataDeletionEndpoint;
+        return $this->privateDelete;
     }
 
-    public function setPrivateDataDeletionEndpoint(PrivateDataDeletionEndpoint $privateDataDeletionEndpoint): void
+    public function setPrivateDelete(PrivateDataDeletionEndpoint $privateDelete): Api
     {
-        $this->privateDataDeletionEndpoint = $privateDataDeletionEndpoint;
-    }
-
-    public function getPublicMediaUploadEndpoint(): PublicMediaUploadEndpoint
-    {
-        return $this->publicMediaUploadEndpoint;
-    }
-
-    public function setPublicMediaUploadEndpoint(PublicMediaUploadEndpoint $publicMediaUploadEndpoint): void
-    {
-        $this->publicMediaUploadEndpoint = $publicMediaUploadEndpoint;
-    }
-
-    public function getPublicMediaUpdateEndpoint(): PublicMediaUpdateEndpoint
-    {
-        return $this->publicMediaUpdateEndpoint;
-    }
-
-    public function setPublicMediaUpdateEndpoint(PublicMediaUpdateEndpoint $publicMediaUpdateEndpoint): void
-    {
-        $this->publicMediaUpdateEndpoint = $publicMediaUpdateEndpoint;
-    }
-
-    public function getPublicMediaListEndpoint(): PublicMediaListEndpoint
-    {
-        return $this->publicMediaListEndpoint;
-    }
-
-    public function setPublicMediaListEndpoint(PublicMediaListEndpoint $publicMediaListEndpoint): void
-    {
-        $this->publicMediaListEndpoint = $publicMediaListEndpoint;
-    }
-
-    public function getPublicMediaDeletionEndpoint(): PublicMediaDeletionEndpoint
-    {
-        return $this->publicMediaDeletionEndpoint;
-    }
-
-    public function setPublicMediaDeletionEndpoint(PublicMediaDeletionEndpoint $publicMediaDeletionEndpoint): void
-    {
-        $this->publicMediaDeletionEndpoint = $publicMediaDeletionEndpoint;
-    }
-
-    public function getPrivateMediaUploadEndpoint(): PrivateMediaUploadEndpoint
-    {
-        return $this->privateMediaUploadEndpoint;
-    }
-
-    public function setPrivateMediaUploadEndpoint(PrivateMediaUploadEndpoint $privateMediaUploadEndpoint): void
-    {
-        $this->privateMediaUploadEndpoint = $privateMediaUploadEndpoint;
-    }
-
-    public function getPrivateMediaUpdateEndpoint(): PrivateMediaUpdateEndpoint
-    {
-        return $this->privateMediaUpdateEndpoint;
-    }
-
-    public function setPrivateMediaUpdateEndpoint(PrivateMediaUpdateEndpoint $privateMediaUpdateEndpoint): void
-    {
-        $this->privateMediaUpdateEndpoint = $privateMediaUpdateEndpoint;
-    }
-
-    public function getPrivateMediaListEndpoint(): PrivateMediaListEndpoint
-    {
-        return $this->privateMediaListEndpoint;
-    }
-
-    public function setPrivateMediaListEndpoint(PrivateMediaListEndpoint $privateMediaListEndpoint): void
-    {
-        $this->privateMediaListEndpoint = $privateMediaListEndpoint;
-    }
-
-    public function getPrivateMediaDeletionEndpoint(): PrivateMediaDeletionEndpoint
-    {
-        return $this->privateMediaDeletionEndpoint;
-    }
-
-    public function setPrivateMediaDeletionEndpoint(PrivateMediaDeletionEndpoint $privateMediaDeletionEndpoint): void
-    {
-        $this->privateMediaDeletionEndpoint = $privateMediaDeletionEndpoint;
+        $this->privateDelete = $privateDelete;
+        return $this;
     }
 }
