@@ -14,13 +14,12 @@ use Tekkl\Shared\Api\Response\ResponseCollection;
 use Tekkl\Shared\Api\Response\ResponseContent;
 use Tekkl\Shared\Security\AccessToken\AccessTokenInterface;
 
-final class PublicDataDeletionEndpoint extends PostEndpoint
+final class PublicWriteEndpoint extends PostEndpoint
 {
     public function __construct()
     {
         parent::__construct();
         $this->setParameters(new RequestParameterCollection());
-
         $this->setBody((new RequestBody())
             ->setRequired(true)
             ->setContentType(ContentType::APPLICATION_JSON)
@@ -32,13 +31,19 @@ final class PublicDataDeletionEndpoint extends PostEndpoint
                     ->setFormat(ParameterFormat::STRING)
                     ->setRequired(false),
                 (new Parameter())
+                    ->setName('value')
+                    ->setType(ParameterType::MIXED)
+                    ->setFormat(ParameterFormat::MIXED)
+                    ->setRequired(true),
+                (new Parameter())
                     ->setName(AccessTokenInterface::PARAM_ACCESS_TOKEN)
                     ->setType(ParameterType::STRING)
                     ->setFormat(ParameterFormat::STRING)
                     ->setRequired(true)
-            ]))));
+            ])))
+        );
 
-        $this->setResponses((new ResponseCollection([
+        $this->setResponses(new ResponseCollection([
             (new Response())
                 ->setStatusCode(200)
                 ->setDescription('OK')
@@ -72,7 +77,7 @@ final class PublicDataDeletionEndpoint extends PostEndpoint
                     ])))),
             (new Response())
                 ->setStatusCode(403)
-                ->setDescription('User is not allowed to delete the data')
+                ->setDescription('User is not allowed to update the data')
                 ->setContent((new ResponseContent())
                     ->setContentType(ContentType::APPLICATION_JSON)
                     ->setType(ParameterType::OBJECT)
@@ -90,7 +95,7 @@ final class PublicDataDeletionEndpoint extends PostEndpoint
                     ])))),
             (new Response())
                 ->setStatusCode(500)
-                ->setDescription('Unable to delete the data')
+                ->setDescription('Unable to save the data')
                 ->setContent((new ResponseContent())
                     ->setContentType(ContentType::APPLICATION_JSON)
                     ->setType(ParameterType::OBJECT)
@@ -106,6 +111,6 @@ final class PublicDataDeletionEndpoint extends PostEndpoint
                             ->setFormat(ParameterFormat::STRING)
                             ->setRequired(true)
                     ]))))
-        ])));
+        ]));
     }
 }

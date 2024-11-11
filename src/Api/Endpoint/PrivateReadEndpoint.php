@@ -14,12 +14,14 @@ use Tekkl\Shared\Api\Response\ResponseCollection;
 use Tekkl\Shared\Api\Response\ResponseContent;
 use Tekkl\Shared\Security\AccessToken\AccessTokenInterface;
 
-final class PrivateDataUpsertionEndpoint extends PostEndpoint
+final class PrivateReadEndpoint extends PostEndpoint
 {
     public function __construct()
     {
         parent::__construct();
+
         $this->setParameters(new RequestParameterCollection());
+
         $this->setBody((new RequestBody())
             ->setRequired(true)
             ->setContentType(ContentType::APPLICATION_JSON)
@@ -31,11 +33,6 @@ final class PrivateDataUpsertionEndpoint extends PostEndpoint
                     ->setFormat(ParameterFormat::STRING)
                     ->setRequired(false),
                 (new Parameter())
-                    ->setName('value')
-                    ->setType(ParameterType::MIXED)
-                    ->setFormat(ParameterFormat::MIXED)
-                    ->setRequired(true),
-                (new Parameter())
                     ->setName(AccessTokenInterface::PARAM_ACCESS_TOKEN)
                     ->setType(ParameterType::STRING)
                     ->setFormat(ParameterFormat::STRING)
@@ -43,7 +40,7 @@ final class PrivateDataUpsertionEndpoint extends PostEndpoint
             ])))
         );
 
-        $this->setResponses(new ResponseCollection([
+        $this->setResponses((new ResponseCollection([
             (new Response())
                 ->setStatusCode(200)
                 ->setDescription('OK')
@@ -55,6 +52,11 @@ final class PrivateDataUpsertionEndpoint extends PostEndpoint
                             ->setName('success')
                             ->setType(ParameterType::BOOLEAN)
                             ->setFormat(ParameterFormat::BOOLEAN)
+                            ->setRequired(true),
+                        (new Parameter())
+                            ->setName('value')
+                            ->setType(ParameterType::MIXED)
+                            ->setFormat(ParameterFormat::MIXED)
                             ->setRequired(true)
                     ])))),
             (new Response())
@@ -77,7 +79,7 @@ final class PrivateDataUpsertionEndpoint extends PostEndpoint
                     ])))),
             (new Response())
                 ->setStatusCode(403)
-                ->setDescription('User is not allowed to update the data')
+                ->setDescription('User is not allowed to read the data')
                 ->setContent((new ResponseContent())
                     ->setContentType(ContentType::APPLICATION_JSON)
                     ->setType(ParameterType::OBJECT)
@@ -94,8 +96,8 @@ final class PrivateDataUpsertionEndpoint extends PostEndpoint
                             ->setRequired(true)
                     ])))),
             (new Response())
-                ->setStatusCode(500)
-                ->setDescription('Unable to save the data')
+                ->setStatusCode(404)
+                ->setDescription('Key not found')
                 ->setContent((new ResponseContent())
                     ->setContentType(ContentType::APPLICATION_JSON)
                     ->setType(ParameterType::OBJECT)
@@ -110,7 +112,7 @@ final class PrivateDataUpsertionEndpoint extends PostEndpoint
                             ->setType(ParameterType::STRING)
                             ->setFormat(ParameterFormat::STRING)
                             ->setRequired(true)
-                    ]))))
-        ]));
+                    ])))),
+        ])));
     }
 }

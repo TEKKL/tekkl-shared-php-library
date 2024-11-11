@@ -2,22 +2,14 @@
 
 namespace Tekkl\Shared\Api;
 
-use Tekkl\Shared\Api\Endpoint\ApplicationRequestEndpointCollection;
-use Tekkl\Shared\Api\Endpoint\PrivateDataDeletionEndpoint;
-use Tekkl\Shared\Api\Endpoint\PrivateDataReadEndpoint;
-use Tekkl\Shared\Api\Endpoint\PrivateDataUpsertionEndpoint;
-use Tekkl\Shared\Api\Endpoint\PrivateMediaDeletionEndpoint;
-use Tekkl\Shared\Api\Endpoint\PrivateMediaListEndpoint;
-use Tekkl\Shared\Api\Endpoint\PrivateMediaUpdateEndpoint;
-use Tekkl\Shared\Api\Endpoint\PrivateMediaUploadEndpoint;
-use Tekkl\Shared\Api\Endpoint\PublicDataDeletionEndpoint;
-use Tekkl\Shared\Api\Endpoint\PublicDataReadEndpoint;
-use Tekkl\Shared\Api\Endpoint\PublicDataUpsertionEndpoint;
-use Tekkl\Shared\Api\Endpoint\PublicMediaDeletionEndpoint;
-use Tekkl\Shared\Api\Endpoint\PublicMediaListEndpoint;
-use Tekkl\Shared\Api\Endpoint\PublicMediaUpdateEndpoint;
-use Tekkl\Shared\Api\Endpoint\PublicMediaUploadEndpoint;
 use Tekkl\Shared\Struct\Struct;
+use Tekkl\Shared\Api\Endpoint\ApplicationRequestEndpointCollection;
+use Tekkl\Shared\Api\Endpoint\PublicReadEndpoint;
+use Tekkl\Shared\Api\Endpoint\PublicWriteEndpoint;
+use Tekkl\Shared\Api\Endpoint\PublicDeleteEndpoint;
+use Tekkl\Shared\Api\Endpoint\PrivateReadEndpoint;
+use Tekkl\Shared\Api\Endpoint\PrivateWriteEndpoint;
+use Tekkl\Shared\Api\Endpoint\PrivateDeleteEndpoint;
 
 final class Api extends Struct
 {
@@ -26,12 +18,12 @@ final class Api extends Struct
     protected string $version;
 
     protected ApplicationRequestEndpointCollection $applicationRequest;
-    protected PublicDataReadEndpoint $publicRead;
-    protected PublicDataUpsertionEndpoint $publicUpsert;
-    protected PublicDataDeletionEndpoint $publicDelete;
-    protected PrivateDataReadEndpoint $privateRead;
-    protected PrivateDataUpsertionEndpoint $privateUpsert;
-    protected PrivateDataDeletionEndpoint $privateDelete;
+    protected PublicReadEndpoint $publicRead;
+    protected PublicWriteEndpoint $publicWrite;
+    protected PublicDeleteEndpoint $publicDelete;
+    protected PrivateReadEndpoint $privateRead;
+    protected PrivateWriteEndpoint $privateWrite;
+    protected PrivateDeleteEndpoint $privateDelete;
 
     public function getName(): string
     {
@@ -77,67 +69,67 @@ final class Api extends Struct
         return $this;
     }
 
-    public function getPublicRead(): PublicDataReadEndpoint
+    public function getPublicRead(): PublicReadEndpoint
     {
         return $this->publicRead;
     }
 
-    public function setPublicRead(PublicDataReadEndpoint $publicRead): Api
+    public function setPublicRead(PublicReadEndpoint $publicRead): Api
     {
         $this->publicRead = $publicRead;
         return $this;
     }
 
-    public function getPublicUpsert(): PublicDataUpsertionEndpoint
+    public function getPublicWrite(): PublicWriteEndpoint
     {
-        return $this->publicUpsert;
+        return $this->publicWrite;
     }
 
-    public function setPublicUpsert(PublicDataUpsertionEndpoint $publicUpsert): Api
+    public function setPublicWrite(PublicWriteEndpoint $publicWrite): Api
     {
-        $this->publicUpsert = $publicUpsert;
+        $this->publicWrite = $publicWrite;
         return $this;
     }
 
-    public function getPublicDelete(): PublicDataDeletionEndpoint
+    public function getPublicDelete(): PublicDeleteEndpoint
     {
         return $this->publicDelete;
     }
 
-    public function setPublicDelete(PublicDataDeletionEndpoint $publicDelete): Api
+    public function setPublicDelete(PublicDeleteEndpoint $publicDelete): Api
     {
         $this->publicDelete = $publicDelete;
         return $this;
     }
 
-    public function getPrivateRead(): PrivateDataReadEndpoint
+    public function getPrivateRead(): PrivateReadEndpoint
     {
         return $this->privateRead;
     }
 
-    public function setPrivateRead(PrivateDataReadEndpoint $privateRead): Api
+    public function setPrivateRead(PrivateReadEndpoint $privateRead): Api
     {
         $this->privateRead = $privateRead;
         return $this;
     }
 
-    public function getPrivateUpsert(): PrivateDataUpsertionEndpoint
+    public function getPrivateWrite(): PrivateWriteEndpoint
     {
-        return $this->privateUpsert;
+        return $this->privateWrite;
     }
 
-    public function setPrivateUpsert(PrivateDataUpsertionEndpoint $privateUpsert): Api
+    public function setPrivateWrite(PrivateWriteEndpoint $privateWrite): Api
     {
-        $this->privateUpsert = $privateUpsert;
+        $this->privateWrite = $privateWrite;
         return $this;
     }
 
-    public function getPrivateDelete(): PrivateDataDeletionEndpoint
+    public function getPrivateDelete(): PrivateDeleteEndpoint
     {
         return $this->privateDelete;
     }
 
-    public function setPrivateDelete(PrivateDataDeletionEndpoint $privateDelete): Api
+    public function setPrivateDelete(PrivateDeleteEndpoint $privateDelete): Api
     {
         $this->privateDelete = $privateDelete;
         return $this;
