@@ -17,6 +17,7 @@ class ContentAppConfig extends Struct
     public const CSS_VARIABLES_FILE = 'css-variables.json';
     public const FONTS_FILE = 'fonts.json';
     public const API_FILE = 'api.json';
+    public const OPEN_API_FILE = 'open-api.json';
 
     /** @var array<array-key, mixed>  */
     protected array $data = [];

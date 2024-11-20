@@ -2,21 +2,25 @@
 
 namespace Tekkl\Shared\Api\Endpoint;
 
-use Tekkl\Shared\Api\Request\Method;
 use Tekkl\Shared\Api\Request\MethodCollection;
-use Tekkl\Shared\Api\Request\RequestBody;
-use Tekkl\Shared\Api\Request\RequestParameterCollection;
-use Tekkl\Shared\Api\Response\ResponseCollection;
-use Tekkl\Shared\Struct\JsonSerializableTrait;
 use Tekkl\Shared\Struct\Struct;
+use OpenApi\Annotations as OA;
 
 abstract class Endpoint extends Struct
 {
     protected string $url;
     protected MethodCollection $methods;
-    protected ResponseCollection $responses;
-    protected ?RequestParameterCollection $parameters = null;
-    protected ?RequestBody $body = null;
+
+    final public function __construct() {}
+
+    public static function create(string $url, array $options = []): static
+    {
+        $endpoint = new static();
+        $endpoint->setUrl($url);
+        $endpoint->setMethods(new MethodCollection($options['methods'] ?? []));
+        return $endpoint;
+    }
+    abstract public function createOpenApiSchema(): OA\PathItem;
 
 
     public function getUrl(): string
@@ -38,39 +42,6 @@ abstract class Endpoint extends Struct
     public function setMethods(MethodCollection $methods): Endpoint
     {
         $this->methods = $methods;
-        return $this;
-    }
-
-    public function getResponses(): ResponseCollection
-    {
-        return $this->responses;
-    }
-
-    public function setResponses(ResponseCollection $responses): Endpoint
-    {
-        $this->responses = $responses;
-        return $this;
-    }
-
-    public function getParameters(): ?RequestParameterCollection
-    {
-        return $this->parameters;
-    }
-
-    public function setParameters(?RequestParameterCollection $parameters): Endpoint
-    {
-        $this->parameters = $parameters;
-        return $this;
-    }
-
-    public function getBody(): ?RequestBody
-    {
-        return $this->body;
-    }
-
-    public function setBody(?RequestBody $body): Endpoint
-    {
-        $this->body = $body;
         return $this;
     }
 }

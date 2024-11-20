@@ -10,8 +10,13 @@ use Tekkl\Shared\Api\Response\ResponseCollection;
 
 abstract class PostEndpoint extends Endpoint
 {
-    public function __construct()
+    public static function create(string $url, array $options = []): static
     {
-        $this->setMethods(new MethodCollection([Method::POST]));
+        return parent::create($url, [
+            ...$options,
+            'methods' => [
+                Method::POST
+            ]
+        ]);
     }
 }

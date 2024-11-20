@@ -7,8 +7,13 @@ use Tekkl\Shared\Api\Request\MethodCollection;
 
 abstract class GetEndpoint extends Endpoint
 {
-    public function __construct()
+    public static function create(string $url, array $options = []): static
     {
-        $this->setMethods(new MethodCollection([Method::GET]));
+        return parent::create($url, [
+            ...$options,
+            'methods' => [
+                Method::GET
+            ]
+        ]);
     }
 }

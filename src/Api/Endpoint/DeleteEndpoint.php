@@ -9,8 +9,13 @@ use Tekkl\Shared\Api\Response\ResponseCollection;
 
 abstract class DeleteEndpoint extends Endpoint
 {
-    public function __construct()
+    public static function create(string $url, array $options = []): static
     {
-        $this->setMethods(new MethodCollection([Method::DELETE]));
+        return parent::create($url, [
+            ...$options,
+            'methods' => [
+                Method::DELETE
+            ]
+        ]);
     }
 }
