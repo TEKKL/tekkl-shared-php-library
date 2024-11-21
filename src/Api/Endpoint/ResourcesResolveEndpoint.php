@@ -1,6 +1,6 @@
 <?php
 
-namespace Tekkl\Workspace\Api\Route\Resource;
+namespace Tekkl\Shared\Api\Endpoint;
 
 use OpenApi\Annotations as OA;
 use Tekkl\Shared\Security\AccessToken\AccessTokenInterface;
