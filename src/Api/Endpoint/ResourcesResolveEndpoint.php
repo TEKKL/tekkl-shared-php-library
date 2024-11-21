@@ -3,6 +3,7 @@
 namespace Tekkl\Workspace\Api\Route\Resource;
 
 use OpenApi\Annotations as OA;
+use Tekkl\Shared\Security\AccessToken\AccessTokenInterface;
 
 final class ResourcesResolveEndpoint extends PostEndpoint
 {
