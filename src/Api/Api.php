@@ -27,6 +27,7 @@ final class Api extends Struct
     protected string $name;
     protected string $description;
     protected string $version;
+    /** @var string[]  */
     protected array $servers;
 
     protected ApplicationRequestEndpointCollection $applicationRequest;
@@ -175,6 +176,9 @@ final class Api extends Struct
         return $this->servers;
     }
 
+    /**
+     * @param string[] $servers
+     */
     public function setServers(array $servers): Api
     {
         $this->servers = $servers;

@@ -23,6 +23,7 @@ class Struct implements \JsonSerializable, ExtendableInterface
         if (false === $data = json_decode($json, true)) {
             return null;
         }
+        /** @phpstan-ignore-next-line  */
         $class = new static();
         $class->assign($data);
         return $class;

@@ -13,6 +13,9 @@ abstract class Endpoint extends Struct
 
     final public function __construct() {}
 
+    /**
+     * @param array<array-key, mixed> $options
+     */
     public static function create(string $url, array $options = []): static
     {
         $endpoint = new static();
