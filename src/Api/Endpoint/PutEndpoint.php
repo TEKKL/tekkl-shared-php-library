@@ -10,6 +10,9 @@ use Tekkl\Shared\Api\Response\ResponseCollection;
 
 abstract class PutEndpoint extends Endpoint
 {
+    /**
+     * @param array<array-key, mixed> $options
+     */
     public static function create(string $url, array $options = []): static
     {
         return parent::create($url, [

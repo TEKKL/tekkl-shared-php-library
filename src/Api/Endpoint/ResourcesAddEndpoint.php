@@ -12,26 +12,5 @@ use Tekkl\Shared\Security\AccessToken\AccessTokenInterface;
 
 final class ResourcesAddEndpoint extends PostEndpoint
 {
-    public function __construct()
-    {
-        parent::__construct();
 
-        $this->setBody((new RequestBody())
-            ->setRequired(true)
-            ->setContentType(ContentType::APPLICATION_JSON)
-            ->setType(ParameterType::OBJECT)
-            ->setParameters((new ParameterCollection([
-                (new Parameter())
-                    ->setName('resources')
-                    ->setType(ParameterType::ARRAY)
-                    ->setFormat(ParameterFormat::OBJECT)
-                    ->setRequired(false),
-                (new Parameter())
-                    ->setName(AccessTokenInterface::PARAM_ACCESS_TOKEN)
-                    ->setType(ParameterType::STRING)
-                    ->setFormat(ParameterFormat::STRING)
-                    ->setRequired(true)
-            ])))
-        );
-    }
 }

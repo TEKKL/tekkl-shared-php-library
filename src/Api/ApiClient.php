@@ -29,7 +29,7 @@ class ApiClient
 
     public function publicRead(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPublicDataReadEndpoint()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPublicDataRead()->getUrl(), [
            'form_params' => [
                'key' => $key,
                AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
@@ -39,7 +39,7 @@ class ApiClient
 
     public function publicUpsert(?string $key, mixed $value): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPublicDataUpsertionEndpoint()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPublicDataWrite()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 'value' => $value,
@@ -50,7 +50,7 @@ class ApiClient
 
     public function publicDelete(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPublicDataDeletionEndpoint()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPublicDataDelete()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
@@ -60,7 +60,7 @@ class ApiClient
 
     public function privateRead(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPrivateDataReadEndpoint()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPrivateDataRead()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
@@ -70,7 +70,7 @@ class ApiClient
 
     public function privateUpsert(?string $key, mixed $value): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPrivateDataUpsertionEndpoint()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPrivateDataWrite()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 'value' => $value,
@@ -81,7 +81,7 @@ class ApiClient
 
     public function privateDeletion(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPrivateDataDeletionEndpoint()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPrivateDataDelete()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,

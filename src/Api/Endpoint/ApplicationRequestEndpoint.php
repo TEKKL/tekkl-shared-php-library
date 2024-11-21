@@ -10,6 +10,10 @@ use RuntimeException;
 final class ApplicationRequestEndpoint extends Endpoint
 {
     protected string $view;
+
+    /**
+     * @param array<array-key, mixed> $options
+     */
     public static function create(string $url, array $options = []): static
     {
         $endpoint = new static();
