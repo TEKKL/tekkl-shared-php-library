@@ -27,12 +27,10 @@ final class PublicDataReadEndpoint extends PostEndpoint
                                     new OA\Property([
                                         'property' => 'key',
                                         'type'     => 'string',
-                                        'format'   => 'string',
                                     ]),
                                     new OA\Property([
                                         'property' => AccessTokenInterface::PARAM_ACCESS_TOKEN,
                                         'type'     => 'string',
-                                        'format'   => 'string',
                                     ]),
                                 ],
                             ]),
@@ -55,8 +53,21 @@ final class PublicDataReadEndpoint extends PostEndpoint
                                             'type'     => 'boolean',
                                         ]),
                                         new OA\Property([
+                                            'property' => 'key',
+                                            'type'     => 'string',
+                                            'nullable' => true,
+                                        ]),
+                                        new OA\Property([
                                             'property' => 'value',
-                                            'type'     => 'object'
+                                            'type'     => 'object',
+                                            'nullable' => true,
+                                            'oneOf'    => [
+                                                new OA\Schema(['type' => 'string']),
+                                                new OA\Schema(['type' => 'number']),
+                                                new OA\Schema(['type' => 'object']),
+                                                new OA\Schema(['type' => 'array']),
+                                                new OA\Schema(['type' => 'boolean']),
+                                            ],
                                         ]),
                                     ],
                                 ]),

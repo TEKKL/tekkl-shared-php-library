@@ -11,6 +11,7 @@ use OpenApi\Annotations\Info;
 use OpenApi\Annotations\OpenApi;
 use Symfony\Component\HttpFoundation\Response;
 use Tekkl\Shared\Api\Endpoint\ApplicationRequestEndpoint;
+use Tekkl\Shared\Api\Endpoint\ResourceListResolveEndpoint;
 use Tekkl\Shared\Security\AccessToken\AccessTokenInterface;
 use Tekkl\Shared\Struct\Struct;
 use Tekkl\Shared\Api\Endpoint\ApplicationRequestEndpointCollection;
@@ -37,6 +38,7 @@ final class Api extends Struct
     protected PrivateDataReadEndpoint $privateDataRead;
     protected PrivateDataWriteEndpoint $privateDataWrite;
     protected PrivateDataDeleteEndpoint $privateDataDelete;
+    protected ResourceListResolveEndpoint $resourceListResolve;
 
     public function createOpenApiSchema(): OpenApi
     {
@@ -169,7 +171,16 @@ final class Api extends Struct
         return $this;
     }
 
+    public function getResourceListResolve(): ResourceListResolveEndpoint
+    {
+        return $this->resourceListResolve;
+    }
 
+    public function setResourceListResolve(ResourceListResolveEndpoint $resourceListResolve): Api
+    {
+        $this->resourceListResolve = $resourceListResolve;
+        return $this;
+    }
 
     public function getServers(): array
     {
@@ -338,6 +349,7 @@ final class Api extends Struct
             'private-data-read' => $this->getPrivateDataRead()->createOpenApiSchema(),
             'private-data-write' => $this->getPrivateDataWrite()->createOpenApiSchema(),
             'private-data-delete' => $this->getPrivateDataDelete()->createOpenApiSchema(),
+            'resource-list-resolve' => $this->getResourceListResolve()->createOpenApiSchema(),
         ];
         /** @var ApplicationRequestEndpoint $endpoint */
         foreach ($this->getApplicationRequest() as $endpoint) {

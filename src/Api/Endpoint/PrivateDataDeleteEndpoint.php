@@ -26,13 +26,12 @@ final class PrivateDataDeleteEndpoint extends PostEndpoint
                                     new OA\Property([
                                         'property'    => AccessTokenInterface::PARAM_ACCESS_TOKEN,
                                         'type'        => 'string',
-                                        'format'      => 'string',
                                         'description' => 'Access token for authentication.',
                                     ]),
                                     new OA\Property([
                                         'property'    => 'key',
                                         'type'        => 'string',
-                                        'format'      => 'string',
+                                        'nullable'    => true,
                                         'description' => 'The key of the data to delete.',
                                     ]),
                                 ],

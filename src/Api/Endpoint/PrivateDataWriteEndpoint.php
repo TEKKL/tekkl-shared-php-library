@@ -26,17 +26,17 @@ final class PrivateDataWriteEndpoint extends PostEndpoint
                                     new OA\Property([
                                         'property' => AccessTokenInterface::PARAM_ACCESS_TOKEN,
                                         'type'     => 'string',
-                                        'format'   => 'string',
                                         'description' => 'Access token for authentication.',
                                     ]),
                                     new OA\Property([
                                         'property' => 'key',
+                                        'nullable' => true,
                                         'type'     => 'string',
-                                        'format'   => 'string',
                                         'description' => 'The key associated with the data.',
                                     ]),
                                     new OA\Property([
                                         'property' => 'value',
+                                        'nullable' => true,
                                         'oneOf'    => [
                                             new OA\Schema(['type' => 'string']),
                                             new OA\Schema(['type' => 'number']),
