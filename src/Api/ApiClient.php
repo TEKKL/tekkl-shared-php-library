@@ -26,7 +26,7 @@ class ApiClient
         return $this->accessToken;
     }
 
-    public function publicRead(?string $key = null): array
+    public function publicDataRead(?string $key = null): array
     {
         return $this->handleResponse($this->client->post($this->api->getPublicDataRead()->getUrl(), [
            'form_params' => [
@@ -36,7 +36,7 @@ class ApiClient
         ]));
     }
 
-    public function publicUpsert(?string $key, mixed $value): array
+    public function publicDataWrite(?string $key, mixed $value): array
     {
         return $this->handleResponse($this->client->post($this->api->getPublicDataWrite()->getUrl(), [
             'form_params' => [
@@ -47,7 +47,7 @@ class ApiClient
         ]));
     }
 
-    public function publicDelete(?string $key = null): array
+    public function publicDataDelete(?string $key = null): array
     {
         return $this->handleResponse($this->client->post($this->api->getPublicDataDelete()->getUrl(), [
             'form_params' => [
@@ -57,7 +57,7 @@ class ApiClient
         ]));
     }
 
-    public function privateRead(?string $key = null): array
+    public function privateDataRead(?string $key = null): array
     {
         return $this->handleResponse($this->client->post($this->api->getPrivateDataRead()->getUrl(), [
             'form_params' => [
@@ -67,7 +67,7 @@ class ApiClient
         ]));
     }
 
-    public function privateUpsert(?string $key, mixed $value): array
+    public function privateDataWrite(?string $key, mixed $value): array
     {
         return $this->handleResponse($this->client->post($this->api->getPrivateDataWrite()->getUrl(), [
             'form_params' => [
@@ -78,7 +78,7 @@ class ApiClient
         ]));
     }
 
-    public function privateDeletion(?string $key = null): array
+    public function privateDataDeletion(?string $key = null): array
     {
         return $this->handleResponse($this->client->post($this->api->getPrivateDataDelete()->getUrl(), [
             'form_params' => [
