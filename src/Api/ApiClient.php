@@ -4,22 +4,21 @@ namespace Tekkl\Shared\Api;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use Tekkl\Shared\ContentApp\Config\ContentAppConfig;
 use Tekkl\Shared\Security\AccessToken\AccessTokenInterface;
 
 class ApiClient
 {
     private Client $client;
     public function __construct(
-        private readonly ContentAppConfig $contentAppConfig,
+        private readonly Api $api,
         private readonly string $accessToken
     ) {
         $this->client = new Client();
     }
 
-    public function getContentAppConfig(): ContentAppConfig
+    public function getApi(): Api
     {
-        return $this->contentAppConfig;
+        return $this->api;
     }
 
     public function getAccessToken(): string
@@ -29,7 +28,7 @@ class ApiClient
 
     public function publicRead(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPublicDataRead()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->api->getPublicDataRead()->getUrl(), [
            'form_params' => [
                'key' => $key,
                AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
@@ -39,7 +38,7 @@ class ApiClient
 
     public function publicUpsert(?string $key, mixed $value): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPublicDataWrite()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->api->getPublicDataWrite()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 'value' => $value,
@@ -50,7 +49,7 @@ class ApiClient
 
     public function publicDelete(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPublicDataDelete()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->api->getPublicDataDelete()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
@@ -60,7 +59,7 @@ class ApiClient
 
     public function privateRead(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPrivateDataRead()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->api->getPrivateDataRead()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
@@ -70,7 +69,7 @@ class ApiClient
 
     public function privateUpsert(?string $key, mixed $value): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPrivateDataWrite()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->api->getPrivateDataWrite()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 'value' => $value,
@@ -81,7 +80,7 @@ class ApiClient
 
     public function privateDeletion(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->contentAppConfig->getApi()->getPrivateDataDelete()->getUrl(), [
+        return $this->handleResponse($this->client->post($this->api->getPrivateDataDelete()->getUrl(), [
             'form_params' => [
                 'key' => $key,
                 AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
