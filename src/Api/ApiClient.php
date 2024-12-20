@@ -28,7 +28,7 @@ class ApiClient
 
     public function publicDataRead(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->absoluteUrl($this->api->getPublicDataRead()->getUrl()), [
+        return $this->handleResponse($this->client->post($this->api->absoluteUrl($this->api->getPublicDataRead()->getUrl()), [
            'form_params' => [
                'key' => $key,
                AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
@@ -38,7 +38,7 @@ class ApiClient
 
     public function publicDataWrite(?string $key, mixed $value): array
     {
-        return $this->handleResponse($this->client->post($this->absoluteUrl($this->api->getPublicDataWrite()->getUrl()), [
+        return $this->handleResponse($this->client->post($this->api->absoluteUrl($this->api->getPublicDataWrite()->getUrl()), [
             'form_params' => [
                 'key' => $key,
                 'value' => $value,
@@ -49,7 +49,7 @@ class ApiClient
 
     public function publicDataDelete(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->absoluteUrl($this->api->getPublicDataDelete()->getUrl()), [
+        return $this->handleResponse($this->client->post($this->api->absoluteUrl($this->api->getPublicDataDelete()->getUrl()), [
             'form_params' => [
                 'key' => $key,
                 AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
@@ -59,7 +59,7 @@ class ApiClient
 
     public function privateDataRead(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->absoluteUrl($this->api->getPrivateDataRead()->getUrl()), [
+        return $this->handleResponse($this->client->post($this->api->absoluteUrl($this->api->getPrivateDataRead()->getUrl()), [
             'form_params' => [
                 'key' => $key,
                 AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
@@ -69,7 +69,7 @@ class ApiClient
 
     public function privateDataWrite(?string $key, mixed $value): array
     {
-        return $this->handleResponse($this->client->post($this->absoluteUrl($this->api->getPrivateDataWrite()->getUrl()), [
+        return $this->handleResponse($this->client->post($this->api->absoluteUrl($this->api->getPrivateDataWrite()->getUrl()), [
             'form_params' => [
                 'key' => $key,
                 'value' => $value,
@@ -80,20 +80,12 @@ class ApiClient
 
     public function privateDataDeletion(?string $key = null): array
     {
-        return $this->handleResponse($this->client->post($this->absoluteUrl($this->api->getPrivateDataDelete()->getUrl()), [
+        return $this->handleResponse($this->client->post($this->api->absoluteUrl($this->api->getPrivateDataDelete()->getUrl()), [
             'form_params' => [
                 'key' => $key,
                 AccessTokenInterface::PARAM_ACCESS_TOKEN => $this->accessToken,
             ],
         ]));
-    }
-
-    public function absoluteUrl(string $url): string
-    {
-        if (!isset($this->api->getServers()[0])) {
-            throw new \RuntimeException('No server found in API configuration');
-        }
-        return $this->api->getServers()[0] . $url;
     }
 
     private function handleResponse(ResponseInterface $response): array

@@ -196,6 +196,14 @@ final class Api extends Struct
         return $this;
     }
 
+    public function absoluteUrl(?string $url = null): string
+    {
+        if (!isset($this->servers[0])) {
+            throw new \RuntimeException('No server defined');
+        }
+        return $this->servers[0] . $url;
+    }
+
     private function enrichComponents(Components $components): void
     {
         $components->merge($this->getDefaultSchemas());
