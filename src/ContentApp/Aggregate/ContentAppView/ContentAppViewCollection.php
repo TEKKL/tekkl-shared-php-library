@@ -9,6 +9,14 @@ use Tekkl\Shared\Struct\Collection;
  */
 class ContentAppViewCollection extends Collection
 {
+    /**
+     * @param ContentAppView $element
+     */
+    public function add($element): void
+    {
+        parent::set($element->getName(), $element);
+    }
+
     protected function getExpectedClass(): ?string
     {
         return ContentAppView::class;
