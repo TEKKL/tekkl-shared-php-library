@@ -1,16 +1,16 @@
 <?php
 
-namespace Tekkl\Shared\ContentApp\Aggregate\ContentAppView;
+namespace Tekkl\Shared\Application\Aggregate\ApplicationView;
 
 use Tekkl\Shared\Struct\Collection;
 
 /**
- * @extends Collection<ContentAppView>
+ * @extends Collection<ApplicationView>
  */
-class ContentAppViewCollection extends Collection
+class ApplicationViewCollection extends Collection
 {
     /**
-     * @param ContentAppView $element
+     * @param ApplicationView $element
      */
     public function add($element): void
     {
@@ -19,6 +19,6 @@ class ContentAppViewCollection extends Collection
 
     protected function getExpectedClass(): ?string
     {
-        return ContentAppView::class;
+        return ApplicationView::class;
     }
 }

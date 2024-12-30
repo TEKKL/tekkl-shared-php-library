@@ -1,21 +1,21 @@
 <?php
 
-namespace Tekkl\Shared\ContentApp;
+namespace Tekkl\Shared\Application;
 
-use Tekkl\Shared\ContentApp\Aggregate\ContentAppBuild\ContentAppBuild;
-use Tekkl\Shared\ContentApp\Aggregate\ContentAppBuild\ContentAppBuildCollection;
-use Tekkl\Shared\ContentApp\Aggregate\ContentAppView\ContentAppView;
-use Tekkl\Shared\ContentApp\Aggregate\ContentAppView\ContentAppViewCollection;
+use Tekkl\Shared\Application\Aggregate\ApplicationBuild\ApplicationBuild;
+use Tekkl\Shared\Application\Aggregate\ApplicationBuild\ApplicationBuildCollection;
+use Tekkl\Shared\Application\Aggregate\ApplicationView\ApplicationView;
+use Tekkl\Shared\Application\Aggregate\ApplicationView\ApplicationViewCollection;
 use Tekkl\Shared\Exception\BuildNotFoundException;
 use Tekkl\Shared\Exception\ViewNotFoundException;
 use Tekkl\Shared\Struct\Struct;
 
-class ContentApp extends Struct
+class Application extends Struct
 {
     protected string $name;
     protected ?string $description = null;
-    protected ContentAppViewCollection $views;
-    protected ContentAppBuildCollection $builds;
+    protected ApplicationViewCollection $views;
+    protected ApplicationBuildCollection $builds;
     protected ?string $path = null;
 
     public function getPath(): ?string
@@ -23,7 +23,7 @@ class ContentApp extends Struct
         return $this->path;
     }
 
-    public function setPath(?string $path): ContentApp
+    public function setPath(?string $path): Application
     {
         $this->path = $path;
         return $this;
@@ -34,7 +34,7 @@ class ContentApp extends Struct
         return $this->name;
     }
 
-    public function setName(string $name): ContentApp
+    public function setName(string $name): Application
     {
         $this->name = $name;
         return $this;
@@ -45,35 +45,35 @@ class ContentApp extends Struct
         return $this->description;
     }
 
-    public function setDescription(?string $description): ContentApp
+    public function setDescription(?string $description): Application
     {
         $this->description = $description;
         return $this;
     }
 
-    public function getViews(): ContentAppViewCollection
+    public function getViews(): ApplicationViewCollection
     {
         return $this->views;
     }
 
-    public function setViews(ContentAppViewCollection $views): ContentApp
+    public function setViews(ApplicationViewCollection $views): Application
     {
         $this->views = $views;
         return $this;
     }
 
-    public function getBuilds(): ContentAppBuildCollection
+    public function getBuilds(): ApplicationBuildCollection
     {
         return $this->builds;
     }
 
-    public function setBuilds(ContentAppBuildCollection $builds): ContentApp
+    public function setBuilds(ApplicationBuildCollection $builds): Application
     {
         $this->builds = $builds;
         return $this;
     }
 
-    public function getBuild(string $build): ContentAppBuild
+    public function getBuild(string $build): ApplicationBuild
     {
         foreach ($this->builds as $buildItem) {
             if ($buildItem->getName() === $build) {
@@ -83,7 +83,7 @@ class ContentApp extends Struct
         throw new BuildNotFoundException($build, $this);
     }
 
-    public function getView(string $view): ContentAppView
+    public function getView(string $view): ApplicationView
     {
         foreach ($this->views as $viewItem) {
             if ($viewItem->getName() === $view) {
@@ -93,7 +93,7 @@ class ContentApp extends Struct
         throw new ViewNotFoundException($view, $this);
     }
 
-    public function getViewBuild(string $view): ContentAppBuild
+    public function getViewBuild(string $view): ApplicationBuild
     {
         $view = $this->getView($view);
         if (!$view->getBuild()) {

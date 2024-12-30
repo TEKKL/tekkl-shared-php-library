@@ -2,7 +2,7 @@
 
 namespace Tekkl\Shared\Element;
 
-use Tekkl\ContentAppServer\ContentApp\Snapshot\ApplicationSnapshot;
+use Tekkl\ApplicationServer\Application\Snapshot\ApplicationSnapshot;
 
 interface ElementInterface
 {

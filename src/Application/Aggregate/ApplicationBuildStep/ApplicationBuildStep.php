@@ -1,10 +1,10 @@
 <?php
 
-namespace Tekkl\Shared\ContentApp\Aggregate\ContentAppBuildStep;
+namespace Tekkl\Shared\Application\Aggregate\ApplicationBuildStep;
 
 use Tekkl\Shared\Struct\Struct;
 
-class ContentAppBuildStep extends Struct
+class ApplicationBuildStep extends Struct
 {
     protected string $command;
     protected ?string $directory = null;

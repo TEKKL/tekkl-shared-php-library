@@ -1,6 +1,6 @@
 <?php
 
-namespace Tekkl\Shared\ContentApp\Config;
+namespace Tekkl\Shared\Application\Config;
 
 use Tekkl\Shared\Api\Api;
 use Tekkl\Shared\Asset\Stylesheet\CssAssetCollection;
@@ -9,9 +9,9 @@ use Tekkl\Shared\Asset\Font\FontCollection;
 use Tekkl\Shared\Asset\Javascript\JavascriptAssetCollection;
 use Tekkl\Shared\Struct\Struct;
 
-class ContentAppConfig extends Struct
+class ApplicationConfig extends Struct
 {
-    public const CONTENT_APP_CONFIG_DIRECTORY = '.content-app-config';
+    public const APPLICATION_CONFIG_DIRECTORY = '.application-config';
     public const JAVASCRIPT_ASSETS_FILE = 'javascript-assets.json';
     public const CSS_ASSETS_FILE = 'css-assets.json';
     public const CSS_VARIABLES_FILE = 'css-variables.json';
@@ -51,7 +51,7 @@ class ContentAppConfig extends Struct
     /**
      * @param array<array-key, mixed> $data
      */
-    public function setData(array $data): ContentAppConfig
+    public function setData(array $data): ApplicationConfig
     {
         $this->data = $data;
         return $this;
@@ -62,7 +62,7 @@ class ContentAppConfig extends Struct
         return $this->javascriptLibraries;
     }
 
-    public function setJavascriptLibraries(JavascriptAssetCollection $javascriptLibraries): ContentAppConfig
+    public function setJavascriptLibraries(JavascriptAssetCollection $javascriptLibraries): ApplicationConfig
     {
         $this->javascriptLibraries = $javascriptLibraries;
         return $this;
@@ -73,7 +73,7 @@ class ContentAppConfig extends Struct
         return $this->cssLibraries;
     }
 
-    public function setCssLibraries(CssAssetCollection $cssLibraries): ContentAppConfig
+    public function setCssLibraries(CssAssetCollection $cssLibraries): ApplicationConfig
     {
         $this->cssLibraries = $cssLibraries;
         return $this;
@@ -84,7 +84,7 @@ class ContentAppConfig extends Struct
         return $this->cssVariables;
     }
 
-    public function setCssVariables(CssVariableCollection $cssVariables): ContentAppConfig
+    public function setCssVariables(CssVariableCollection $cssVariables): ApplicationConfig
     {
         $this->cssVariables = $cssVariables;
         return $this;
@@ -95,7 +95,7 @@ class ContentAppConfig extends Struct
         return $this->fonts;
     }
 
-    public function setFonts(FontCollection $fonts): ContentAppConfig
+    public function setFonts(FontCollection $fonts): ApplicationConfig
     {
         $this->fonts = $fonts;
         return $this;
@@ -106,7 +106,7 @@ class ContentAppConfig extends Struct
         return $this->api;
     }
 
-    public function setApi(Api $api): ContentAppConfig
+    public function setApi(Api $api): ApplicationConfig
     {
         $this->api = $api;
         return $this;

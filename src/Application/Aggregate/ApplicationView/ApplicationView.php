@@ -1,10 +1,10 @@
 <?php
 
-namespace Tekkl\Shared\ContentApp\Aggregate\ContentAppView;
+namespace Tekkl\Shared\Application\Aggregate\ApplicationView;
 
 use Tekkl\Shared\Struct\Struct;
 
-class ContentAppView extends Struct
+class ApplicationView extends Struct
 {
     protected string $name;
     protected ?string $label = null;
@@ -69,7 +69,7 @@ class ContentAppView extends Struct
         return $this->indexFile;
     }
 
-    public function setIndexFile(?string $indexFile): ContentAppView
+    public function setIndexFile(?string $indexFile): ApplicationView
     {
         $this->indexFile = $indexFile;
         return $this;
