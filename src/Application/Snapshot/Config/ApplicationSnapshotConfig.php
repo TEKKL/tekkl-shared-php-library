@@ -1,6 +1,6 @@
 <?php
 
-namespace Tekkl\Shared\Application\Config;
+namespace Tekkl\Shared\Application\Snapshot\Config;
 
 use Tekkl\Shared\Api\Api;
 use Tekkl\Shared\Asset\Stylesheet\CssAssetCollection;
@@ -9,7 +9,7 @@ use Tekkl\Shared\Asset\Font\FontCollection;
 use Tekkl\Shared\Asset\Javascript\JavascriptAssetCollection;
 use Tekkl\Shared\Struct\Struct;
 
-class ApplicationConfig extends Struct
+class ApplicationSnapshotConfig extends Struct
 {
     public const APPLICATION_CONFIG_DIRECTORY = '.application-config';
     public const JAVASCRIPT_ASSETS_FILE = 'javascript-assets.json';
@@ -51,7 +51,7 @@ class ApplicationConfig extends Struct
     /**
      * @param array<array-key, mixed> $data
      */
-    public function setData(array $data): ApplicationConfig
+    public function setData(array $data): ApplicationSnapshotConfig
     {
         $this->data = $data;
         return $this;
@@ -62,7 +62,7 @@ class ApplicationConfig extends Struct
         return $this->javascriptLibraries;
     }
 
-    public function setJavascriptLibraries(JavascriptAssetCollection $javascriptLibraries): ApplicationConfig
+    public function setJavascriptLibraries(JavascriptAssetCollection $javascriptLibraries): ApplicationSnapshotConfig
     {
         $this->javascriptLibraries = $javascriptLibraries;
         return $this;
@@ -73,7 +73,7 @@ class ApplicationConfig extends Struct
         return $this->cssLibraries;
     }
 
-    public function setCssLibraries(CssAssetCollection $cssLibraries): ApplicationConfig
+    public function setCssLibraries(CssAssetCollection $cssLibraries): ApplicationSnapshotConfig
     {
         $this->cssLibraries = $cssLibraries;
         return $this;
@@ -84,7 +84,7 @@ class ApplicationConfig extends Struct
         return $this->cssVariables;
     }
 
-    public function setCssVariables(CssVariableCollection $cssVariables): ApplicationConfig
+    public function setCssVariables(CssVariableCollection $cssVariables): ApplicationSnapshotConfig
     {
         $this->cssVariables = $cssVariables;
         return $this;
@@ -95,7 +95,7 @@ class ApplicationConfig extends Struct
         return $this->fonts;
     }
 
-    public function setFonts(FontCollection $fonts): ApplicationConfig
+    public function setFonts(FontCollection $fonts): ApplicationSnapshotConfig
     {
         $this->fonts = $fonts;
         return $this;
@@ -106,7 +106,7 @@ class ApplicationConfig extends Struct
         return $this->api;
     }
 
-    public function setApi(Api $api): ApplicationConfig
+    public function setApi(Api $api): ApplicationSnapshotConfig
     {
         $this->api = $api;
         return $this;

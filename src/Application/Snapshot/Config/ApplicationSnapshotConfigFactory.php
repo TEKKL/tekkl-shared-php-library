@@ -1,10 +1,10 @@
 <?php
 
-namespace Tekkl\Shared\Application\Config;
+namespace Tekkl\Shared\Application\Snapshot\Config;
 
-class ApplicationConfigFactory
+class ApplicationSnapshotConfigFactory
 {
-    public static function create(string $pathToConfigFile): ?ApplicationConfig
+    public static function create(string $pathToConfigFile): ?ApplicationSnapshotConfig
     {
         if (!file_exists($pathToConfigFile)) {
             return null;
@@ -16,7 +16,7 @@ class ApplicationConfigFactory
         if (false === $configArray = json_decode($json, true)) {
             return null;
         }
-        $config = new ApplicationConfig();
+        $config = new ApplicationSnapshotConfig();
         $config->assign($configArray);
         return $config;
     }
